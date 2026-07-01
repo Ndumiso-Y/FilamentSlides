@@ -81,6 +81,48 @@ function evidenceWall(visual, step) {
   </div>`;
 }
 
+function engineeringDieselFlow(step) {
+  return `<div class="engineering-flow diesel-study">
+    <div class="flow-zone surface">Surface</div>
+    <div class="flow-zone underground">Underground</div>
+    <div class="flow-node oval fuel diesel ${is(step, 1)}">Diesel</div>
+    <div class="flow-node oval fuel oil ${is(step, 1)}">Oil</div>
+    <div class="flow-node bay ${is(step, 1)}">Diesel Bay</div>
+    <div class="flow-node workshop ${is(step, 1)}">Drill Rig Eng. W/shop</div>
+    <div class="flow-node uv ${is(step, 1)}">Utility Vehicle</div>
+    <div class="flow-node central ${is(step, 1)}">Central Fueling Location</div>
+    <div class="flow-node mine ${is(step, 1)}">Mine Workings</div>
+    <div class="flow-arrow drums ${is(step, 1)}">Drums</div>
+    <div class="flow-arrow cassettes ${is(step, 1)}">Cassettes</div>
+    <div class="flow-arrow refuel ${is(step, 1)}">Re-fuel diesel cassettes</div>
+    <div class="flow-arrow refueled ${is(step, 1)}">Re-fueled cassette</div>
+    <aside class="flow-callout bay-issues ${is(step, 2)}"><strong>Diesel bay losses</strong><span>Arrival time</span><span>Reporting procedure</span><span>Traffic / queuing</span><span>Contaminated containers</span><span>D/Bay used as P/Bay at E.O.S.</span></aside>
+    <aside class="flow-callout uv-issues ${is(step, 3)}"><strong>Utility vehicle constraint</strong><span>1 UV</span><span>1 operator</span><span>No operator on A/S and N/S</span><span>Under utilisation of UV</span><span>Communication: no radio</span></aside>
+    <aside class="flow-callout section-gap ${is(step, 4)}"><strong>Execution gap</strong><span>UV never goes to the section</span></aside>
+  </div>`;
+}
+
+function engineeringFlowChart(visual, step) {
+  return `<div class="engineering-chart">
+    <div class="chart-path">${visual.path.map((item, i) => `<article class="${is(step, i + 1)}"><span>${String(i + 1).padStart(2, "0")}</span><strong>${item}</strong></article>`).join("")}</div>
+    <div class="chart-risks">${visual.risks.map((item, i) => `<aside class="${is(step, visual.path.length + i + 1)}"><strong>${item.title}</strong><p>${item.text}</p></aside>`).join("")}</div>
+  </div>`;
+}
+
+function pipelineProtection(step) {
+  const phases = ["Development", "Construction", "Equipping", "Stoping"];
+  return `<div class="pipeline-protection">
+    <div class="stoping-panels">${[1, 2, 3, 4].map((n, i) => `<span class="${is(step, i + 1)}">Stoping Panel</span>`).join("")}</div>
+    <div class="pipeline-row">${phases.map((phase, i) => `<article class="${is(step, i + 2)}"><strong>${phase}</strong></article>`).join("")}</div>
+    <div class="pipeline-buffer ${is(step, 5)}">Pipeline Buffer</div>
+    <div class="pipeline-actions">
+      <article class="${is(step, 6)}"><strong>Stagger buffered pipelines</strong><p>Protect the stoping pipeline before it collides with shared resources.</p></article>
+      <article class="${is(step, 7)}"><strong>Integrate pipelines</strong><p>Connect development, construction, equipping and stoping into one protected execution sequence.</p></article>
+      <article class="${is(step, 8)}"><strong>Resource contention</strong><p>Surface contention early instead of overloading resources already under pressure to recover BP08.</p></article>
+    </div>
+  </div>`;
+}
+
 function businessModel(visual, step) {
   return `<div class="business-model">
     <section class="${is(step, 1)}">
@@ -208,6 +250,9 @@ export function renderVisual(visual, step) {
   if (visual.type === "magnifier") return magnifier(visual, step);
   if (visual.type === "profile") return profile(visual, step);
   if (visual.type === "evidenceWall") return evidenceWall(visual, step);
+  if (visual.type === "engineeringDieselFlow") return engineeringDieselFlow(step);
+  if (visual.type === "engineeringFlowChart") return engineeringFlowChart(visual, step);
+  if (visual.type === "pipelineProtection") return pipelineProtection(step);
   if (visual.type === "businessModel") return businessModel(visual, step);
   if (visual.type === "goalSystem") return goalSystem(step);
   if (visual.type === "roiSystem") return roiSystem(step);
