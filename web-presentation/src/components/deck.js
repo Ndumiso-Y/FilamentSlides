@@ -33,36 +33,15 @@ function renderDetails(details) {
   `;
 }
 
-function derivedDetails(slide) {
-  const items = [];
-  if (slide.statement) items.push(slide.statement);
-  if (slide.visual?.items?.length) {
-    slide.visual.items.forEach((item) => {
-      if (typeof item === "string") items.push(item);
-      if (item?.title || item?.text) items.push([item.eyebrow, item.title, item.text].filter(Boolean).join(": "));
-      if (item?.name || item?.role) items.push([item.name, item.role].filter(Boolean).join(": "));
-      if (item?.caption) items.push(item.caption);
-    });
-  }
-  if (slide.visual?.caption) items.push(slide.visual.caption);
-  if (slide.visual?.insight) items.push(slide.visual.insight);
-  if (slide.visual?.note) items.push(slide.visual.note);
-  if (slide.visual?.summary) items.push(slide.visual.summary);
-  if (slide.visual?.points?.length) items.push(...slide.visual.points);
-  if (slide.tags?.length) items.push(`Tags: ${slide.tags.join(", ")}`);
-  if (!items.length) return null;
-  return { items };
-}
-
 function renderSlide(slide, index, forcedStep = null) {
-  const step = forcedStep ?? state.step;
+  const step = forcedStep ?? slide.steps ?? state.step;
   const tags = (slide.tags || []).map((tag) => `<span>${tag}</span>`).join("");
   const body = [
     slide.kicker ? `<p class="kicker">${slide.kicker}</p>` : "",
     `<h1>${slide.title}</h1>`,
     slide.statement ? `<p class="statement">${slide.statement}</p>` : "",
     slide.visual ? renderVisual(slide.visual, step) : "",
-    renderDetails(slide.details || derivedDetails(slide)),
+    renderDetails(slide.details),
     slide.points?.length ? `<div class="point-grid">${slide.points.map((p, i) => visible(`<article><strong>${p.label}</strong><p>${p.text}</p></article>`, step, i + 1)).join("")}</div>` : "",
     slide.quote ? visible(`<blockquote>${slide.quote}</blockquote>`, step, 1) : "",
     tags ? `<div class="tag-row">${tags}</div>` : "",
@@ -72,7 +51,7 @@ function renderSlide(slide, index, forcedStep = null) {
   return `
     <section class="slide ${slide.tone || "light"} ${slide.layout || ""}">
       ${meta(slide, index)}
-      <div class="brand-mark"><img src="${new URL("../assets/Filament logo.png", import.meta.url).href}" alt="Filament" /></div>
+      <div class="brand-mark"><img src="${new URL("../assets/filament-logo-cropped.png", import.meta.url).href}" alt="Filament" /></div>
       <div class="slide-content">${body}</div>
     </section>
   `;
@@ -131,20 +110,15 @@ function render() {
 }
 
 function next() {
-  const maxStep = slides[state.index].steps || 1;
-  if (state.step < maxStep) {
-    state.step += 1;
-  } else if (state.index < slides.length - 1) {
+  if (state.index < slides.length - 1) {
     state.index += 1;
-    state.step = 1;
+    state.step = slides[state.index].steps || 1;
   }
   render();
 }
 
 function prev() {
-  if (state.step > 1) {
-    state.step -= 1;
-  } else if (state.index > 0) {
+  if (state.index > 0) {
     state.index -= 1;
     state.step = slides[state.index].steps || 1;
   }
