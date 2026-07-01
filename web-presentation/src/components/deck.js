@@ -23,6 +23,39 @@ function meta(slide, index) {
   `;
 }
 
+function renderDetails(details) {
+  if (!details?.items?.length) return "";
+  const items = details.items.map((item) => `<li>${item}</li>`).join("");
+  return `
+    <aside class="copy-panel">
+      <small>${details.label || "Full source copy"}</small>
+      <strong>${details.title || "Presenter copy"}</strong>
+      <ul>${items}</ul>
+    </aside>
+  `;
+}
+
+function derivedDetails(slide) {
+  const items = [];
+  if (slide.statement) items.push(slide.statement);
+  if (slide.visual?.items?.length) {
+    slide.visual.items.forEach((item) => {
+      if (typeof item === "string") items.push(item);
+      if (item?.title || item?.text) items.push([item.eyebrow, item.title, item.text].filter(Boolean).join(": "));
+      if (item?.name || item?.role) items.push([item.name, item.role].filter(Boolean).join(": "));
+      if (item?.caption) items.push(item.caption);
+    });
+  }
+  if (slide.visual?.caption) items.push(slide.visual.caption);
+  if (slide.visual?.insight) items.push(slide.visual.insight);
+  if (slide.visual?.note) items.push(slide.visual.note);
+  if (slide.visual?.summary) items.push(slide.visual.summary);
+  if (slide.visual?.points?.length) items.push(...slide.visual.points);
+  if (slide.tags?.length) items.push(`Tags: ${slide.tags.join(", ")}`);
+  if (!items.length) return null;
+  return { label: "Page copy", title: "Complete on-page copy", items };
+}
+
 function renderSlide(slide, index, forcedStep = null) {
   const step = forcedStep ?? state.step;
   const tags = (slide.tags || []).map((tag) => `<span>${tag}</span>`).join("");
@@ -31,6 +64,7 @@ function renderSlide(slide, index, forcedStep = null) {
     `<h1>${slide.title}</h1>`,
     slide.statement ? `<p class="statement">${slide.statement}</p>` : "",
     slide.visual ? renderVisual(slide.visual, step) : "",
+    renderDetails(slide.details || derivedDetails(slide)),
     slide.points?.length ? `<div class="point-grid">${slide.points.map((p, i) => visible(`<article><strong>${p.label}</strong><p>${p.text}</p></article>`, step, i + 1)).join("")}</div>` : "",
     slide.quote ? visible(`<blockquote>${slide.quote}</blockquote>`, step, 1) : "",
     tags ? `<div class="tag-row">${tags}</div>` : "",
