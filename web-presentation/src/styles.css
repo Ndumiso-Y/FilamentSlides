@@ -208,7 +208,7 @@ h1 {
 
 .copy-panel {
   width: min(100%, 1180px);
-  max-height: 18vh;
+  max-height: 27vh;
   overflow: hidden;
   margin: 22px 0 0;
   padding: 16px 20px;
@@ -1066,7 +1066,7 @@ blockquote {
 .engineering-flow {
   position: relative;
   width: min(100%, 1180px);
-  height: 520px;
+  height: 480px;
   margin-top: 24px;
   border-radius: 8px;
   background:
@@ -1127,10 +1127,10 @@ blockquote {
 .flow-node.diesel { left: 15%; top: 19%; }
 .flow-node.oil { left: 15%; top: 72%; }
 .flow-node.bay { left: 43%; top: 12%; }
-.flow-node.workshop { left: 46%; top: 73%; }
-.flow-node.uv { left: 63%; top: 52%; }
-.flow-node.central { right: 6%; top: 50%; }
-.flow-node.mine { right: 6%; top: 76%; }
+.flow-node.workshop { left: 40%; top: 68%; }
+.flow-node.uv { left: 63%; top: 50%; }
+.flow-node.central { right: 6%; top: 64%; }
+.flow-node.mine { right: 6%; top: 78%; }
 .flow-arrow {
   color: var(--navy);
   font-size: 12px;
@@ -1150,7 +1150,7 @@ blockquote {
 .flow-arrow.refuel { left: 50%; top: 37%; width: 190px; color: #be123c; }
 .flow-arrow.refueled { left: 56%; top: 30%; width: 220px; }
 .flow-callout {
-  padding: 14px 16px;
+  padding: 10px 12px;
   border-radius: 8px;
   border: 1px dashed rgba(220,38,38,.55);
   background: rgba(255,255,255,.94);
@@ -1162,20 +1162,20 @@ blockquote {
   display: block;
 }
 .flow-callout strong {
-  margin-bottom: 7px;
+  margin-bottom: 5px;
   color: #7f1d1d;
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: .05em;
 }
 .flow-callout span {
-  font-size: 12px;
-  line-height: 1.28;
+  font-size: 11px;
+  line-height: 1.2;
   font-weight: 800;
 }
-.flow-callout.bay-issues { left: 57%; top: 5%; width: 260px; }
-.flow-callout.uv-issues { right: 2%; top: 27%; width: 280px; }
-.flow-callout.section-gap { right: 13%; bottom: 9%; width: 255px; }
+.flow-callout.bay-issues { left: 57%; top: 2%; width: 260px; }
+.flow-callout.uv-issues { right: 2%; top: 24%; width: 280px; }
+.flow-callout.section-gap { right: 34%; bottom: 2%; width: 255px; }
 .flow-node.is-on,
 .flow-arrow.is-on,
 .flow-callout.is-on {
@@ -1498,11 +1498,14 @@ blockquote {
 .chart-risks aside:nth-child(2) { animation-delay: .56s; }
 .chart-risks aside:nth-child(3) { animation-delay: .64s; }
 
+.engineering-constraint-map-wrap {
+  width: min(100%, 1120px);
+  margin-top: 24px;
+}
 .engineering-constraint-map {
   position: relative;
-  width: min(100%, 1120px);
-  height: 520px;
-  margin-top: 24px;
+  width: 100%;
+  height: 480px;
   border-radius: 8px;
   background:
     radial-gradient(circle at 50% 50%, rgba(240,100,35,.16), transparent 24%),
@@ -1525,8 +1528,7 @@ blockquote {
   animation-delay: .8s;
 }
 .constraint-core,
-.constraint-group,
-.constraint-outcome {
+.constraint-group {
   position: absolute;
   opacity: .12;
   transform: translateY(16px) scale(.98);
@@ -1534,16 +1536,23 @@ blockquote {
   border-radius: 8px;
   box-shadow: 0 18px 42px rgba(6,25,47,.12);
 }
+.constraint-outcome {
+  opacity: .12;
+  transform: translateY(16px);
+  transition: .36s ease;
+  border-radius: 8px;
+  box-shadow: 0 18px 42px rgba(6,25,47,.12);
+}
 .constraint-core {
   left: 50%;
   top: 50%;
-  width: 260px;
-  min-height: 150px;
+  width: 230px;
+  min-height: 100px;
   transform: translate(-50%, -50%) scale(.96);
   display: grid;
   place-items: center;
   text-align: center;
-  padding: 22px;
+  padding: 16px;
   background: linear-gradient(160deg, var(--navy), var(--blue));
   color: #fff;
 }
@@ -1554,46 +1563,44 @@ blockquote {
   display: block;
 }
 .constraint-core strong {
-  font-size: clamp(20px, 1.8vw, 30px);
-  line-height: 1.02;
+  font-size: clamp(17px, 1.5vw, 24px);
+  line-height: 1.05;
 }
 .constraint-core span {
   color: rgba(255,255,255,.78);
-  margin-top: 10px;
-  font-size: 14px;
+  margin-top: 6px;
+  font-size: 12px;
 }
 .constraint-group {
-  width: 280px;
-  padding: 16px;
+  width: 260px;
+  padding: 12px;
   background: rgba(255,255,255,.96);
   border: 1px solid rgba(6,25,47,.12);
   border-top: 5px solid var(--orange);
 }
-.constraint-group.group-1 { left: 4%; top: 10%; }
-.constraint-group.group-2 { right: 4%; top: 10%; }
-.constraint-group.group-3 { left: 4%; bottom: 14%; }
-.constraint-group.group-4 { right: 4%; bottom: 14%; }
+.constraint-group.group-1 { left: 4%; top: 4%; }
+.constraint-group.group-2 { right: 4%; top: 4%; }
+.constraint-group.group-3 { left: 4%; bottom: 4%; }
+.constraint-group.group-4 { right: 4%; bottom: 4%; }
 .constraint-group strong {
   color: var(--navy);
-  font-size: clamp(16px, 1.2vw, 21px);
-  margin-bottom: 10px;
+  font-size: clamp(14px, 1.05vw, 18px);
+  margin-bottom: 6px;
 }
 .constraint-group span {
   width: fit-content;
-  margin: 6px 6px 0 0;
-  padding: 6px 9px;
+  margin: 4px 5px 0 0;
+  padding: 4px 8px;
   border-radius: 999px;
   background: rgba(18,103,168,.08);
   color: #344054;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
 }
 .constraint-outcome {
-  left: 50%;
-  bottom: 16px;
   width: min(72%, 760px);
+  margin: 16px auto 0;
   padding: 14px 20px;
-  transform: translateX(-50%) translateY(16px);
   background: var(--orange);
   color: #fff;
   text-align: center;
@@ -1614,7 +1621,7 @@ blockquote {
   transform: translateY(0) scale(1) !important;
 }
 .constraint-outcome.is-on {
-  transform: translateX(-50%) translateY(0) !important;
+  transform: translateY(0) !important;
   animation: riseIn .5s cubic-bezier(.2,.8,.2,1) both, flowPulse 2s ease-in-out infinite .8s;
 }
 .constraint-group.group-2 { animation-delay: .08s; }
@@ -2633,31 +2640,95 @@ blockquote {
   .deck-chrome { right: 12px; bottom: 12px; }
 }
 
-/* Shorter browser windows and small fullscreen displays: shrink vertical rhythm
-   and allow the slide body to scroll instead of clipping under overflow:hidden. */
-@media (max-height: 760px) {
-  :root { --nav-safe: 84px; }
-  .slide { --pad-top: clamp(18px, 3.2vh, 40px); --pad-bottom: max(clamp(18px, 3.2vh, 40px), var(--nav-safe)); }
-  .slide-content { overflow-y: auto; }
-  .slide-meta { margin-bottom: clamp(10px, 1.6vh, 24px); }
-  .brand-mark { top: clamp(18px, 3.2vh, 40px); padding: 10px 14px; }
-  .brand-mark img { width: clamp(110px, 7vw, 160px); }
-  .kicker { margin-bottom: 8px; }
-  h1 { font-size: clamp(22px, 4.4vh, 52px); line-height: 1.03; }
-  .statement { margin: 8px 0 14px; font-size: clamp(13px, 2vh, 19px); }
-  .copy-panel { max-height: 15vh; margin-top: 10px; padding: 10px 14px; }
+/* Shorter browser windows and small fullscreen displays (this threshold covers
+   common 768px-tall fullscreen resolutions like 1366x768): shrink vertical
+   rhythm so slides keep fitting without introducing scrolling. */
+@media (max-height: 820px) {
+  :root { --nav-safe: 78px; }
+  .slide { --pad-top: clamp(14px, 2.8vh, 32px); --pad-bottom: max(clamp(14px, 2.8vh, 32px), var(--nav-safe)); }
+  .slide-meta { margin-bottom: clamp(8px, 1.4vh, 20px); }
+  .brand-mark { top: clamp(14px, 2.8vh, 32px); padding: 8px 12px; }
+  .brand-mark img { width: clamp(90px, 6vw, 140px); }
+  .kicker { margin-bottom: 6px; font-size: clamp(10px, 1.3vh, 14px); }
+  h1 { font-size: clamp(20px, 3.8vh, 46px); line-height: 1.04; }
+  .statement { margin: 6px 0 10px; font-size: clamp(12px, 1.7vh, 17px); }
+  .copy-panel { max-height: 24vh; margin-top: 8px; padding: 8px 12px; }
+  .copy-panel li { font-size: clamp(10px, 1.35vh, 13px); margin-bottom: 4px; line-height: 1.22; }
   .source-plate, .magnifier-layout, .profile-layout, .evidence-wall, .goal-system, .roi-system,
   .mining-process, .flow-system, .buffer-system, .method-wheel, .lean-architecture,
   .graduate-pipeline, .premium-win-model, .pressure-map, .concept-curve, .business-model,
   .toc-loop, .engineering-flow, .tmm-readiness-model, .engineering-constraint-map,
   .engineering-chart, .pipeline-protection, .closing-impact, .partner-matrix-visual,
-  .capability-matrix { margin-top: 12px; }
-  .source-plate img, .magnifier-layout img { max-height: 32vh; }
-  .profile-photo { height: min(30vh, 320px); }
+  .capability-matrix { margin-top: 8px; }
+  .source-plate img, .magnifier-layout img { max-height: 30vh; }
+  .profile-photo { height: min(26vh, 280px); }
   .business-pillars article { min-height: 0; }
   .toc-loop div { min-height: 0; }
   .toc-loop p { font-size: 10px; }
-  .deck-chrome { bottom: 12px; }
+  .deck-chrome { bottom: 10px; }
+
+  /* Pipeline derivation and protection: shrink flow-block rhythm to fit. */
+  .stoping-panels { margin-bottom: 8px; gap: 8px; }
+  .stoping-panels span { padding: 8px; font-size: 12px; }
+  .pipeline-row { gap: 8px; }
+  .pipeline-row article { min-height: 64px; font-size: 12px; }
+  .pipeline-buffer { margin: 8px auto; padding: 10px; font-size: clamp(13px, 1.8vh, 18px); }
+  .pipeline-actions { gap: 8px; }
+  .pipeline-actions article { padding: 10px; }
+  .pipeline-actions strong { font-size: 13px; }
+  .pipeline-actions p { font-size: 11px; margin-top: 4px; line-height: 1.25; }
+
+  /* Ring/absolute diagrams (TMM readiness, diesel flow, constraint map) collapse
+     into a plain, non-overlapping card grid rather than a fixed-height canvas -
+     guarantees every card stays fully visible with no scrolling required. */
+  .tmm-readiness-model,
+  .engineering-flow,
+  .engineering-constraint-map {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    padding: 10px;
+    align-content: start;
+    align-items: stretch;
+  }
+  .tmm-readiness-model::before, .tmm-readiness-model::after,
+  .engineering-constraint-map::before, .engineering-constraint-map::after,
+  .engineering-flow::before,
+  .flow-zone,
+  .tmm-systems article::after {
+    display: none;
+  }
+  .flow-arrow::after { display: none; }
+  .tmm-systems, .tmm-roadmap { display: contents; }
+  .tmm-ramp, .tmm-question, .tmm-systems article, .tmm-control, .tmm-gates, .tmm-roadmap article,
+  .flow-node, .flow-arrow, .flow-callout,
+  .constraint-core, .constraint-group, .constraint-outcome {
+    position: static !important;
+    inset: auto !important;
+    left: auto !important; right: auto !important; top: auto !important; bottom: auto !important;
+    width: auto !important; min-width: 0 !important; min-height: 44px !important;
+    transform: none !important;
+    grid-column: span 1;
+    padding: 8px !important;
+  }
+  .tmm-question, .constraint-core, .constraint-outcome { grid-column: span 4 !important; }
+  .tmm-control, .tmm-gates, .tmm-ramp, .flow-callout { grid-column: span 2 !important; }
+  /* the .is-on reveal state re-applies centering transforms at equal/higher
+     specificity than the reset above - neutralise those too so grid items
+     don't get shifted out of their cell once revealed. */
+  .tmm-question.is-on, .tmm-control.is-on,
+  .constraint-core.is-on, .constraint-outcome.is-on {
+    transform: none !important;
+  }
+  .tmm-ramp strong, .tmm-control strong, .constraint-core strong { font-size: 15px !important; }
+  .tmm-systems strong, .tmm-question, .constraint-group strong, .flow-node, .flow-callout strong { font-size: 12px !important; }
+  .tmm-systems span, .tmm-ramp span, .tmm-control span, .constraint-core span, .constraint-group span,
+  .flow-callout span, .tmm-roadmap small, .tmm-roadmap strong { font-size: 11px !important; }
+  .tmm-question { font-size: 13px !important; line-height: 1.2; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .flow-arrow { grid-column: span 1; font-size: 11px !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {

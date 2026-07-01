@@ -141,9 +141,11 @@ function engineeringConstraintMap(step) {
     ["Utility vehicle capacity", ["1 UV", "1 operator", "No operator on A/S and N/S", "Under-utilisation", "No radio"]],
     ["Underground delivery", ["Central fueling location", "Drill rig eng. workshop", "Mine workings", "UV never goes to the section"]]
   ];
-  return `<div class="engineering-constraint-map">
-    <div class="constraint-core ${is(step, 1)}"><strong>Engineering study signal</strong><span>Small delays become lost face time</span></div>
-    ${groups.map((group, i) => `<article class="constraint-group group-${i + 1} ${is(step, i + 2)}"><strong>${group[0]}</strong>${group[1].map((item) => `<span>${item}</span>`).join("")}</article>`).join("")}
+  return `<div class="engineering-constraint-map-wrap">
+    <div class="engineering-constraint-map">
+      <div class="constraint-core ${is(step, 1)}"><strong>Engineering study signal</strong><span>Small delays become lost face time</span></div>
+      ${groups.map((group, i) => `<article class="constraint-group group-${i + 1} ${is(step, i + 2)}"><strong>${group[0]}</strong>${group[1].map((item) => `<span>${item}</span>`).join("")}</article>`).join("")}
+    </div>
     <div class="constraint-outcome ${is(step, 6)}">Micro-schedule the constraint before it reaches the production face</div>
   </div>`;
 }
