@@ -104,15 +104,15 @@ function goalSystem(step) {
   const outcomes = ["MHS", "Tonnes", "Grade", "Cost", "Share Price"];
   return `<div class="goal-system">
     <div class="resource-stack">${resources.map((r, i) => `<div class="${is(step, i + 1)}">${r}</div>`).join("")}</div>
-    <svg viewBox="0 0 760 270" aria-label="Resource management goal system">
+    <svg viewBox="0 0 820 270" aria-label="Resource management goal system">
       <defs><marker id="arrow-goal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z"/></marker></defs>
-      <path class="sys-line ${is(step, 2)}" d="M110 135H250" />
-      <rect class="sys-box ${is(step, 5)}" x="255" y="55" width="250" height="160" rx="18" />
-      ${controls.map((c, i) => `<text class="sys-text ${is(step, 5 + i)}" x="${300 + (i % 2) * 105}" y="${105 + Math.floor(i / 2) * 62}">${c}</text>`).join("")}
-      <path class="sys-line ${is(step, 9)}" d="M505 135H640" />
-      <circle class="goal-core ${is(step, 10)}" cx="675" cy="135" r="58" />
-      <text class="goal-label ${is(step, 10)}" x="675" y="128">THE GOAL</text>
-      <text class="goal-sub ${is(step, 10)}" x="675" y="150">Now + future</text>
+      <path class="sys-line ${is(step, 2)}" d="M110 135H238" />
+      <rect class="sys-box ${is(step, 5)}" x="245" y="55" width="320" height="160" rx="18" />
+      ${controls.map((c, i) => `<text class="sys-text ${is(step, 5 + i)}" x="${325 + (i % 2) * 160}" y="${105 + Math.floor(i / 2) * 62}">${c}</text>`).join("")}
+      <path class="sys-line ${is(step, 9)}" d="M565 135H638" />
+      <circle class="goal-core ${is(step, 10)}" cx="700" cy="135" r="58" />
+      <text class="goal-label ${is(step, 10)}" x="700" y="128">THE GOAL</text>
+      <text class="goal-sub ${is(step, 10)}" x="700" y="150">Now + future</text>
     </svg>
     <div class="outcome-strip">${outcomes.map((o, i) => `<span class="${is(step, 10 + i)}">${o}</span>`).join("")}</div>
   </div>`;
