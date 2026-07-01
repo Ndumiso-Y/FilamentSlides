@@ -1169,7 +1169,7 @@ blockquote {
 .tmm-readiness-model {
   position: relative;
   width: min(100%, 1180px);
-  height: 520px;
+  height: 600px;
   margin-top: 24px;
   border-radius: 8px;
   overflow: hidden;
@@ -1243,15 +1243,15 @@ blockquote {
   left: 50%;
   top: 50%;
   z-index: 3;
-  width: 330px;
-  min-height: 132px;
+  width: 420px;
+  min-height: 110px;
   display: grid;
   place-items: center;
-  padding: 22px;
+  padding: 16px;
   color: #fff;
   text-align: center;
-  font-size: clamp(17px, 1.35vw, 23px);
-  line-height: 1.18;
+  font-size: clamp(15px, 1.15vw, 20px);
+  line-height: 1.16;
   font-weight: 900;
   background: var(--navy);
   border: 2px solid rgba(240,100,35,.76);
@@ -1280,9 +1280,9 @@ blockquote {
 .tmm-systems article:nth-child(2)::after { left: -34px; bottom: -20px; transform: rotate(-38deg); }
 .tmm-systems article:nth-child(3) { right: 40px; top: 154px; }
 .tmm-systems article:nth-child(3)::after { left: -44px; top: 48px; }
-.tmm-systems article:nth-child(4) { right: 290px; bottom: 112px; }
+.tmm-systems article:nth-child(4) { right: 290px; bottom: 130px; }
 .tmm-systems article:nth-child(4)::after { left: -34px; top: -20px; transform: rotate(38deg); }
-.tmm-systems article:nth-child(5) { left: 315px; bottom: 112px; }
+.tmm-systems article:nth-child(5) { left: 315px; bottom: 130px; }
 .tmm-systems article:nth-child(5)::after { right: -34px; top: -20px; transform: rotate(-38deg); }
 .tmm-systems article:nth-child(6) { left: 40px; top: 186px; }
 .tmm-systems article:nth-child(6)::after { right: -44px; top: 48px; }
@@ -2353,15 +2353,15 @@ blockquote {
   .toc-loop { grid-template-columns: repeat(3, 1fr); width: 100%; }
   .toc-loop div { min-height: 0; }
   .engineering-flow { width: 100%; height: 460px; }
-  .tmm-readiness-model { width: 100%; height: 460px; }
+  .tmm-readiness-model { width: 100%; height: 560px; }
   .tmm-ramp { left: 22px; top: 30px; width: 210px; }
-  .tmm-question { width: 290px; min-height: 118px; font-size: clamp(15px, 1.55vw, 20px); }
+  .tmm-question { width: 340px; min-height: 100px; padding: 12px; font-size: clamp(13px, 1.35vw, 17px); }
   .tmm-systems article { width: 190px; min-height: 78px; padding: 12px; }
   .tmm-systems article:nth-child(1) { left: 255px; top: 24px; }
   .tmm-systems article:nth-child(2) { right: 225px; top: 24px; }
   .tmm-systems article:nth-child(3) { right: 22px; top: 130px; }
-  .tmm-systems article:nth-child(4) { right: 225px; bottom: 98px; }
-  .tmm-systems article:nth-child(5) { left: 255px; bottom: 98px; }
+  .tmm-systems article:nth-child(4) { right: 225px; bottom: 110px; }
+  .tmm-systems article:nth-child(5) { left: 255px; bottom: 110px; }
   .tmm-systems article:nth-child(6) { left: 22px; top: 172px; }
   .tmm-control { width: 330px; bottom: 18px; }
   .tmm-gates { right: 22px; bottom: 18px; width: 260px; }
