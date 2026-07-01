@@ -109,6 +109,20 @@ function engineeringFlowChart(visual, step) {
   </div>`;
 }
 
+function engineeringConstraintMap(step) {
+  const groups = [
+    ["Material flow", ["Diesel", "Oil", "Cassettes", "Drums", "Re-fueled cassette"]],
+    ["Reporting losses", ["Arrival time", "Reporting procedure", "Poor control-room reporting", "Late oil ordering"]],
+    ["Utility vehicle capacity", ["1 UV", "1 operator", "No operator on A/S and N/S", "Under-utilisation", "No radio"]],
+    ["Underground delivery", ["Central fueling location", "Drill rig eng. workshop", "Mine workings", "UV never goes to the section"]]
+  ];
+  return `<div class="engineering-constraint-map">
+    <div class="constraint-core ${is(step, 1)}"><strong>Engineering study signal</strong><span>Small delays become lost face time</span></div>
+    ${groups.map((group, i) => `<article class="constraint-group group-${i + 1} ${is(step, i + 2)}"><strong>${group[0]}</strong>${group[1].map((item) => `<span>${item}</span>`).join("")}</article>`).join("")}
+    <div class="constraint-outcome ${is(step, 6)}">Micro-schedule the constraint before it reaches the production face</div>
+  </div>`;
+}
+
 function pipelineProtection(step) {
   const phases = ["Development", "Construction", "Equipping", "Stoping"];
   return `<div class="pipeline-protection">
@@ -252,6 +266,7 @@ export function renderVisual(visual, step) {
   if (visual.type === "evidenceWall") return evidenceWall(visual, step);
   if (visual.type === "engineeringDieselFlow") return engineeringDieselFlow(step);
   if (visual.type === "engineeringFlowChart") return engineeringFlowChart(visual, step);
+  if (visual.type === "engineeringConstraintMap") return engineeringConstraintMap(step);
   if (visual.type === "pipelineProtection") return pipelineProtection(step);
   if (visual.type === "businessModel") return businessModel(visual, step);
   if (visual.type === "goalSystem") return goalSystem(step);

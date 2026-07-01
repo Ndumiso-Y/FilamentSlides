@@ -33,6 +33,16 @@ button { font: inherit; }
   100% { transform: translateX(210%) skewX(-18deg); opacity: 0; }
 }
 
+@keyframes flowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(240,100,35,.34); }
+  50% { box-shadow: 0 0 0 10px rgba(240,100,35,0); }
+}
+
+@keyframes warningRing {
+  0%, 100% { outline-color: rgba(220,38,38,.26); transform: translateY(0) scale(1); }
+  50% { outline-color: rgba(220,38,38,.62); transform: translateY(0) scale(1.015); }
+}
+
 .presentation-shell {
   width: 100%;
   min-height: 100vh;
@@ -1129,6 +1139,14 @@ blockquote {
   transform: translateY(0) !important;
   animation: riseIn .5s cubic-bezier(.2,.8,.2,1) both;
 }
+.flow-node.oval.is-on,
+.flow-arrow.is-on::after {
+  animation: flowPulse 1.8s ease-in-out infinite;
+}
+.flow-callout.is-on {
+  outline: 2px solid rgba(220,38,38,.34);
+  animation: riseIn .5s cubic-bezier(.2,.8,.2,1) both, warningRing 2.4s ease-in-out infinite .8s;
+}
 .flow-callout.bay-issues { animation-delay: .18s; }
 .flow-callout.uv-issues { animation-delay: .36s; }
 .flow-callout.section-gap { animation-delay: .54s; }
@@ -1215,6 +1233,9 @@ blockquote {
   transform: translateY(0) !important;
   animation: riseIn .5s cubic-bezier(.2,.8,.2,1) both;
 }
+.chart-risks aside.is-on {
+  animation: riseIn .5s cubic-bezier(.2,.8,.2,1) both, warningRing 2.8s ease-in-out infinite 1s;
+}
 .chart-path article:nth-child(2) { animation-delay: .08s; }
 .chart-path article:nth-child(3) { animation-delay: .16s; }
 .chart-path article:nth-child(4) { animation-delay: .24s; }
@@ -1223,6 +1244,129 @@ blockquote {
 .chart-risks aside:nth-child(1) { animation-delay: .48s; }
 .chart-risks aside:nth-child(2) { animation-delay: .56s; }
 .chart-risks aside:nth-child(3) { animation-delay: .64s; }
+
+.engineering-constraint-map {
+  position: relative;
+  width: min(100%, 1120px);
+  height: 520px;
+  margin-top: 24px;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(240,100,35,.16), transparent 24%),
+    linear-gradient(135deg, #fff, #eef4f8);
+  border: 1px solid rgba(6,25,47,.12);
+  box-shadow: 0 18px 42px rgba(6,25,47,.1);
+  overflow: hidden;
+}
+.engineering-constraint-map::before,
+.engineering-constraint-map::after {
+  content: "";
+  position: absolute;
+  inset: 16%;
+  border: 1px dashed rgba(18,103,168,.22);
+  border-radius: 50%;
+  animation: flowPulse 3.4s ease-in-out infinite;
+}
+.engineering-constraint-map::after {
+  inset: 26%;
+  animation-delay: .8s;
+}
+.constraint-core,
+.constraint-group,
+.constraint-outcome {
+  position: absolute;
+  opacity: .12;
+  transform: translateY(16px) scale(.98);
+  transition: .36s ease;
+  border-radius: 8px;
+  box-shadow: 0 18px 42px rgba(6,25,47,.12);
+}
+.constraint-core {
+  left: 50%;
+  top: 50%;
+  width: 260px;
+  min-height: 150px;
+  transform: translate(-50%, -50%) scale(.96);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 22px;
+  background: linear-gradient(160deg, var(--navy), var(--blue));
+  color: #fff;
+}
+.constraint-core strong,
+.constraint-core span,
+.constraint-group strong,
+.constraint-group span {
+  display: block;
+}
+.constraint-core strong {
+  font-size: clamp(20px, 1.8vw, 30px);
+  line-height: 1.02;
+}
+.constraint-core span {
+  color: rgba(255,255,255,.78);
+  margin-top: 10px;
+  font-size: 14px;
+}
+.constraint-group {
+  width: 280px;
+  padding: 16px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(6,25,47,.12);
+  border-top: 5px solid var(--orange);
+}
+.constraint-group.group-1 { left: 4%; top: 10%; }
+.constraint-group.group-2 { right: 4%; top: 10%; }
+.constraint-group.group-3 { left: 4%; bottom: 14%; }
+.constraint-group.group-4 { right: 4%; bottom: 14%; }
+.constraint-group strong {
+  color: var(--navy);
+  font-size: clamp(16px, 1.2vw, 21px);
+  margin-bottom: 10px;
+}
+.constraint-group span {
+  width: fit-content;
+  margin: 6px 6px 0 0;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(18,103,168,.08);
+  color: #344054;
+  font-size: 12px;
+  font-weight: 800;
+}
+.constraint-outcome {
+  left: 50%;
+  bottom: 16px;
+  width: min(72%, 760px);
+  padding: 14px 20px;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--orange);
+  color: #fff;
+  text-align: center;
+  font-weight: 900;
+  font-size: clamp(16px, 1.25vw, 22px);
+}
+.constraint-core.is-on,
+.constraint-group.is-on,
+.constraint-outcome.is-on {
+  opacity: 1 !important;
+  animation: riseIn .5s cubic-bezier(.2,.8,.2,1) both;
+}
+.constraint-core.is-on {
+  transform: translate(-50%, -50%) scale(1) !important;
+  animation: riseIn .5s cubic-bezier(.2,.8,.2,1) both, flowPulse 2.5s ease-in-out infinite .8s;
+}
+.constraint-group.is-on {
+  transform: translateY(0) scale(1) !important;
+}
+.constraint-outcome.is-on {
+  transform: translateX(-50%) translateY(0) !important;
+  animation: riseIn .5s cubic-bezier(.2,.8,.2,1) both, flowPulse 2s ease-in-out infinite .8s;
+}
+.constraint-group.group-2 { animation-delay: .08s; }
+.constraint-group.group-3 { animation-delay: .16s; }
+.constraint-group.group-4 { animation-delay: .24s; }
 
 .pipeline-protection {
   width: min(100%, 1120px);
@@ -1302,6 +1446,9 @@ blockquote {
   opacity: 1 !important;
   transform: translateY(0) !important;
   animation: riseIn .5s cubic-bezier(.2,.8,.2,1) both;
+}
+.pipeline-buffer.is-on {
+  animation: riseIn .5s cubic-bezier(.2,.8,.2,1) both, flowPulse 1.9s ease-in-out infinite .7s;
 }
 .stoping-panels span:nth-child(2),
 .pipeline-row article:nth-child(2) { animation-delay: .08s; }
@@ -1980,6 +2127,8 @@ blockquote {
   .business-pillars { grid-template-columns: 1fr; }
   .business-pillars article { min-height: 0; }
   .engineering-flow { width: 100%; height: 460px; }
+  .engineering-constraint-map { width: 100%; height: 500px; }
+  .constraint-group { width: 250px; }
   .engineering-chart { width: 100%; grid-template-columns: 1fr; }
   .chart-path { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .pipeline-protection { width: 100%; }
@@ -2114,6 +2263,18 @@ blockquote {
   .evidence-zoom span,
   .pdf-frame a { font-size: 9px; padding: 6px 8px; }
   .engineering-flow { height: 360px; margin-top: 14px; }
+  .engineering-constraint-map { height: 360px; margin-top: 14px; }
+  .constraint-core { width: 150px; min-height: 104px; padding: 12px; }
+  .constraint-core strong { font-size: 14px; }
+  .constraint-core span { font-size: 9px; margin-top: 6px; }
+  .constraint-group { width: 150px; padding: 8px; }
+  .constraint-group strong { font-size: 10px; margin-bottom: 5px; }
+  .constraint-group span { font-size: 7px; padding: 4px 6px; margin-top: 4px; }
+  .constraint-outcome { bottom: 8px; padding: 8px 10px; font-size: 10px; width: 84%; }
+  .constraint-group.group-1 { left: 2%; top: 8%; }
+  .constraint-group.group-2 { right: 2%; top: 8%; }
+  .constraint-group.group-3 { left: 2%; bottom: 18%; }
+  .constraint-group.group-4 { right: 2%; bottom: 18%; }
   .flow-zone { font-size: 9px; left: 8px; }
   .flow-node { min-width: 76px; min-height: 38px; padding: 6px; font-size: 8px; }
   .flow-node.oval { min-width: 58px; min-height: 44px; }
