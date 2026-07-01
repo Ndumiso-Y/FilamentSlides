@@ -141,6 +141,13 @@ function winModel(step) {
   return `<div class="premium-win-model">${items.map((item, i) => `<article class="${is(step, i + 1)}"><strong>${item[0]}</strong><span>${item[1]}</span></article>`).join("")}<div class="shared-value ${is(step, 5)}">Shared value</div></div>`;
 }
 
+function closingImpact(visual, step) {
+  return `<div class="closing-impact">
+    <div class="closing-ribbon ${is(step, 1)}">filament</div>
+    <div class="closing-cards">${visual.items.map((item, i) => `<article class="${is(step, i + 1)}"><span>0${i + 1}</span><strong>${item.title}</strong><p>${item.text}</p></article>`).join("")}</div>
+  </div>`;
+}
+
 function pressure(step) {
   return `<div class="pressure-map">${[["VUCA", "volatile operating context"], ["Governance", "oversight intensity"], ["MHSA", "compliance obligations"], ["Interdependence", "linked mining system"], ["Time", "not enough hours"], ["ROI", "capital return pressure"]].map((item, i) => `<article class="${is(step, i + 1)}"><strong>${item[0]}</strong><span>${item[1]}</span></article>`).join("")}<div>Employer bandwidth</div></div>`;
 }
@@ -165,6 +172,7 @@ export function renderVisual(visual, step) {
   if (visual.type === "proofResults") return proofResults(step);
   if (visual.type === "graduatePipeline") return graduatePipeline(step);
   if (visual.type === "winModel") return winModel(step);
+  if (visual.type === "closingImpact") return closingImpact(visual, step);
   if (visual.type === "orbit") return pressure(step);
   return "";
 }
