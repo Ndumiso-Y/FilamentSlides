@@ -2,7 +2,7 @@ const trp = "20250227 Two Rivers Platinum (TRP) Productivity Improvement.pptx";
 const filament = "FILAMENT.pdf";
 
 const source = (file, ref, action = "confirmed source, redesigned") => `${file} | ${ref} | ${action}`;
-const detail = (title, items, label = "Full source copy") => ({ title, items, label });
+const detail = (title, items) => ({ title, items });
 
 export const slides = [
   { section: "Opening", title: "Productivity Transformation, One Person at a Time.", kicker: "Two Rivers Platinum Mine | Focus Group Implementation", statement: "Productivity improvement for Two Rivers Platinum, framed as a focused implementation conversation dated 27 February 2025.", tone: "hero", tags: ["TOC", "Lean Transformation", "Sustainment"], visual: { type: "lanes", items: ["Problem", "Constraint", "Flow", "Capability", "Sustain"] }, steps: 5, source: source(filament, "Page 1 / TRP Slide 1", "confirmed exact source") },

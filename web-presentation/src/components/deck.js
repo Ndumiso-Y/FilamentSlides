@@ -28,8 +28,6 @@ function renderDetails(details) {
   const items = details.items.map((item) => `<li>${item}</li>`).join("");
   return `
     <aside class="copy-panel">
-      <small>${details.label || "Full source copy"}</small>
-      <strong>${details.title || "Presenter copy"}</strong>
       <ul>${items}</ul>
     </aside>
   `;
@@ -53,7 +51,7 @@ function derivedDetails(slide) {
   if (slide.visual?.points?.length) items.push(...slide.visual.points);
   if (slide.tags?.length) items.push(`Tags: ${slide.tags.join(", ")}`);
   if (!items.length) return null;
-  return { label: "Page copy", title: "Complete on-page copy", items };
+  return { items };
 }
 
 function renderSlide(slide, index, forcedStep = null) {
