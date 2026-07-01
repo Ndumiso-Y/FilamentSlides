@@ -2,9 +2,7 @@ const assetMap = {
   "operations/tmm-engineering-asset-readiness-model.jpg": new URL("../assets/operations/tmm-engineering-asset-readiness-model.jpg", import.meta.url).href,
   "trp/source-diagrams/poogi-performance-source.png": new URL("../assets/trp/source-diagrams/poogi-performance-source.png", import.meta.url).href,
   "trp/source-diagrams/chasm-source.png": new URL("../assets/trp/source-diagrams/chasm-source.png", import.meta.url).href,
-  "trp/image42.png": new URL("../assets/trp/image42.png", import.meta.url).href,
-  "trp/image43.png": new URL("../assets/trp/image43.png", import.meta.url).href,
-  "reference-letters/reference-letters-copy.pdf": new URL("../assets/reference-letters/reference-letters-copy.pdf", import.meta.url).href,
+  "reference-letters/reference-letters-right-side-up.pdf": new URL("../assets/reference-letters/reference-letters-right-side-up.pdf", import.meta.url).href,
   "team/monique.png": new URL("../assets/team/monique-white-background.png", import.meta.url).href,
   "team/vincent.png": new URL("../assets/team/vincent-white-background.png", import.meta.url).href,
   "team/sadha-govender.jpg": new URL("../assets/team/sadha-white-background.png", import.meta.url).href,
@@ -74,7 +72,7 @@ function evidenceWall(visual, step) {
     <div class="evidence-docs">${visual.items.map((item, i) => {
       const url = asset(item.src);
       const media = item.kind === "pdf"
-        ? `<div class="evidence-zoom pdf-frame"><iframe src="${url}#view=FitH" title="${item.caption}"></iframe><a href="${url}" target="_blank" rel="noreferrer">Open PDF</a></div>`
+        ? `<div class="evidence-zoom pdf-frame"><iframe src="${url}#page=${item.page || 1}&view=FitV" title="${item.caption}"></iframe><a href="${url}" target="_blank" rel="noreferrer">Open full PDF</a></div>`
         : `<a class="evidence-zoom" href="${url}" target="_blank" rel="noreferrer"><img src="${url}" alt="${item.caption}" /><span>Open full size</span></a>`;
       return `<figure class="${item.kind === "pdf" ? "pdf-evidence" : ""} ${is(step, i + 2)}">${media}<figcaption>${item.caption}</figcaption></figure>`;
     }).join("")}</div>

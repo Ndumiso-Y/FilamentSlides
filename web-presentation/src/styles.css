@@ -973,15 +973,15 @@ blockquote {
 
 .evidence-wall {
   display: grid;
-  grid-template-columns: 28% 1fr;
-  gap: 20px;
+  grid-template-columns: minmax(210px, 20%) 1fr;
+  gap: 16px;
   align-items: center;
 }
-.evidence-callout { min-height: 220px; }
+.evidence-callout { min-height: 190px; }
 .evidence-docs {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
 }
 .evidence-docs figure {
   opacity: .12;
@@ -997,7 +997,7 @@ blockquote {
 }
 .evidence-docs iframe {
   width: 100%;
-  height: 350px;
+  height: min(46vh, 430px);
   border: 0;
   display: block;
   background: #fff;
