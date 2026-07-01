@@ -11,7 +11,9 @@ const assetMap = {
   "team/marc-corcoran.jpg": new URL("../assets/team/marc-corcoran.jpg", import.meta.url).href,
   "team/zweli.png": new URL("../assets/team/zweli.png", import.meta.url).href,
   "team/lefu.png": new URL("../assets/team/lefu.png", import.meta.url).href,
-  "team/dr-rudy.jpg": new URL("../assets/team/dr-rudy.jpg", import.meta.url).href
+  "team/dr-rudy.jpg": new URL("../assets/team/dr-rudy.jpg", import.meta.url).href,
+  "team/mxolisi-kobus.jpg": new URL("../assets/team/mxolisi-kobus.jpg", import.meta.url).href,
+  "partners/barloworld.jpg": new URL("../assets/partners/barloworld.jpg", import.meta.url).href
 };
 
 const asset = (path) => assetMap[path] || "";
@@ -38,6 +40,11 @@ function timeline(items, step) {
 
 function matrix(items, step) {
   return `<div class="capability-matrix">${items.map((item, i) => `<article class="${is(step, i + 1)}"><strong>${item.name}</strong><span>${item.role}</span>${item.text ? `<p>${item.text}</p>` : ""}</article>`).join("")}</div>`;
+}
+
+function partnerMatrix(visual, step) {
+  const logo = visual.logo ? `<div class="partner-logo-strip ${is(step, 1)}"><small>${visual.logo.label}</small><img src="${asset(visual.logo.src)}" alt="${visual.logo.alt || visual.logo.label}" /></div>` : "";
+  return `<div class="partner-matrix-visual">${logo}${matrix(visual.items, step)}</div>`;
 }
 
 function sourcePlate(visual, step) {
@@ -196,6 +203,7 @@ export function renderVisual(visual, step) {
   if (visual.type === "compare") return compare(visual.items, step);
   if (visual.type === "timeline") return timeline(visual.items, step);
   if (visual.type === "matrix") return matrix(visual.items, step);
+  if (visual.type === "partnerMatrix") return partnerMatrix(visual, step);
   if (visual.type === "sourcePlate") return sourcePlate(visual, step);
   if (visual.type === "magnifier") return magnifier(visual, step);
   if (visual.type === "profile") return profile(visual, step);
