@@ -25,7 +25,9 @@ function meta(slide, index) {
 
 function renderDetails(details) {
   if (!details?.items?.length) return "";
-  const items = details.items.map((item) => `<li>${item}</li>`).join("");
+  if (/full credential copy/i.test(details.title || "")) return "";
+  const visibleItems = details.items.slice(0, details.limit || 4);
+  const items = visibleItems.map((item) => `<li>${item}</li>`).join("");
   return `
     <aside class="copy-panel">
       <ul>${items}</ul>

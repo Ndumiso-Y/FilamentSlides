@@ -14,7 +14,7 @@
 }
 
 * { box-sizing: border-box; }
-html, body, #root { width: 100%; min-height: 100%; margin: 0; overflow-x: hidden; }
+html, body, #root { width: 100%; height: 100%; min-height: 100%; margin: 0; overflow: hidden; }
 button { font: inherit; }
 
 @keyframes riseIn {
@@ -45,7 +45,8 @@ button { font: inherit; }
 
 .presentation-shell {
   width: 100%;
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
   display: block;
   background:
     radial-gradient(circle at 18% 14%, rgba(18,103,168,.26), transparent 26%),
@@ -54,14 +55,16 @@ button { font: inherit; }
 
 .stage {
   width: 100%;
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 0;
   padding: 0;
 }
 
 .slide-frame {
   width: 100%;
-  min-height: 100vh;
-  overflow: visible;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
   border-radius: 0;
   box-shadow: none;
   background: var(--white);
@@ -69,10 +72,11 @@ button { font: inherit; }
 
 .slide {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
+  min-height: 0;
   position: relative;
-  overflow: visible;
-  padding: clamp(42px, 4.8vw, 78px) clamp(30px, 6vw, 108px) clamp(76px, 6vw, 112px);
+  overflow: hidden;
+  padding: clamp(32px, 4.1vw, 66px) clamp(30px, 5.6vw, 96px) clamp(48px, 4.8vw, 82px);
   background:
     linear-gradient(90deg, rgba(240,100,35,.06), transparent 35%),
     linear-gradient(180deg, #fff, #f7f9fb);
@@ -104,7 +108,9 @@ button { font: inherit; }
   z-index: 2;
   width: 100%;
   max-width: 1480px;
-  min-height: calc(100vh - clamp(118px, 10vw, 190px));
+  height: calc(100dvh - clamp(96px, 8.6vw, 158px));
+  min-height: 0;
+  overflow: hidden;
   display: block;
 }
 
@@ -116,7 +122,7 @@ button { font: inherit; }
   top: auto;
   display: flex;
   justify-content: space-between;
-  margin-bottom: clamp(34px, 5vw, 78px);
+  margin-bottom: clamp(22px, 3.8vw, 58px);
   color: rgba(20,32,51,.55);
   font-size: clamp(10px, .82vw, 13px);
   text-transform: uppercase;
@@ -128,8 +134,8 @@ button { font: inherit; }
 .brand-mark {
   position: absolute;
   z-index: 5;
-  top: clamp(42px, 4.8vw, 78px);
-  right: clamp(30px, 6vw, 108px);
+  top: clamp(32px, 4.1vw, 66px);
+  right: clamp(30px, 5.6vw, 96px);
   background: #fff;
   padding: 16px 22px;
   border-radius: 6px;
@@ -156,7 +162,7 @@ button { font: inherit; }
 h1 {
   max-width: min(980px, 78%);
   margin: 0;
-  font-size: clamp(34px, 4.6vw, 72px);
+  font-size: clamp(32px, 4.1vw, 66px);
   line-height: .98;
   letter-spacing: 0;
   animation: riseIn .58s cubic-bezier(.2,.8,.2,1) both .06s;
@@ -164,8 +170,8 @@ h1 {
 
 .statement {
   max-width: min(1120px, 82%);
-  margin: 16px 0 34px;
-  font-size: clamp(17px, 1.65vw, 27px);
+  margin: 14px 0 26px;
+  font-size: clamp(16px, 1.45vw, 24px);
   line-height: 1.35;
   color: var(--muted);
   animation: riseIn .58s cubic-bezier(.2,.8,.2,1) both .12s;
@@ -198,10 +204,10 @@ h1 {
 
 .copy-panel {
   width: min(100%, 1180px);
-  max-height: none;
-  overflow: visible;
-  margin: 30px 0 0;
-  padding: 22px 26px;
+  max-height: 18vh;
+  overflow: hidden;
+  margin: 22px 0 0;
+  padding: 16px 20px;
   border-radius: 8px;
   background: rgba(255,255,255,.96);
   border: 1px solid rgba(6,25,47,.14);
@@ -218,8 +224,8 @@ h1 {
   break-inside: avoid;
   margin: 0 0 7px;
   color: #344054;
-  font-size: clamp(13px, 1.02vw, 17px);
-  line-height: 1.38;
+  font-size: clamp(12px, .92vw, 15px);
+  line-height: 1.3;
 }
 .hero .copy-panel {
   background: rgba(255,255,255,.1);
@@ -776,11 +782,11 @@ blockquote {
 
 .profile-layout {
   display: grid;
-  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
-  gap: clamp(28px, 4vw, 56px);
+  grid-template-columns: minmax(300px, 390px) minmax(0, 1fr);
+  gap: clamp(22px, 3.2vw, 44px);
   align-items: stretch;
   min-height: 0;
-  margin: 32px 0 36px;
+  margin: 24px 0 0;
 }
 .profile-photo {
   align-self: stretch;
@@ -793,14 +799,15 @@ blockquote {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 520px;
+  min-height: 0;
+  height: min(48vh, 500px);
   padding: clamp(10px, 1.2vw, 18px);
   border: 1px solid rgba(6,25,47,.08);
 }
 .profile-photo img {
   width: 100%;
   height: 100%;
-  min-height: 520px;
+  min-height: 0;
   object-fit: contain;
   object-position: center center;
   display: block;
@@ -810,7 +817,7 @@ blockquote {
   opacity: .1;
   transform: translateY(18px);
   transition: .45s ease;
-  padding: clamp(28px, 3vw, 46px);
+  padding: clamp(22px, 2.4vw, 36px);
   border-radius: 8px;
   background: #fff;
   border-top: 6px solid var(--orange);
@@ -825,31 +832,31 @@ blockquote {
 .profile-layout h2 {
   margin: 8px 0 10px;
   color: var(--navy);
-  font-size: clamp(34px, 3.25vw, 56px);
+  font-size: clamp(30px, 2.9vw, 48px);
 }
 .profile-layout p {
   color: #475467;
-  line-height: 1.45;
-  font-size: clamp(15px, 1.2vw, 20px);
+  line-height: 1.35;
+  font-size: clamp(14px, 1.02vw, 18px);
 }
 .profile-layout ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 10px;
   padding: 0;
-  margin: 18px 0 0;
+  margin: 14px 0 0;
   list-style: none;
 }
 .profile-layout li {
   opacity: .15;
   transform: translateY(10px);
   transition: .32s ease;
-  padding: 14px 16px;
+  padding: 11px 13px;
   border-radius: 8px;
   background: rgba(18,103,168,.08);
   color: var(--navy);
   font-weight: 800;
-  font-size: clamp(13px, 1.02vw, 17px);
+  font-size: clamp(12px, .92vw, 15px);
 }
 
 .business-model {
@@ -2177,7 +2184,7 @@ blockquote {
     width: 100%;
     height: 100%;
     min-height: 0;
-    overflow: auto;
+    overflow: hidden;
     padding: clamp(18px, 4.5vw, 32px);
   }
   .slide-meta {
@@ -2196,7 +2203,9 @@ blockquote {
   .brand-mark img { width: clamp(74px, 17vw, 116px); height: auto; }
   .slide-content {
     max-width: none;
+    height: calc(100% - clamp(24px, 5vw, 42px));
     min-height: 0;
+    overflow: hidden;
   }
   .kicker { margin-top: 0; }
   h1 { max-width: calc(100% - 118px); font-size: clamp(22px, 6.2vw, 40px); line-height: 1; }
@@ -2235,7 +2244,7 @@ blockquote {
     line-height: 1.25;
     margin-top: 6px;
   }
-  .copy-panel { width: 100%; max-height: 28vh; overflow: auto; margin: 12px 0 0; padding: 10px 12px; }
+  .copy-panel { width: 100%; max-height: 22vh; overflow: hidden; margin: 10px 0 0; padding: 9px 11px; }
   .copy-panel ul { columns: 1; }
   .copy-panel li { font-size: clamp(9px, 2.3vw, 12px); line-height: 1.35; }
   .source-plate, .magnifier-layout, .profile-layout, .evidence-wall { gap: 10px; }
@@ -2256,8 +2265,8 @@ blockquote {
   .profile-layout p { font-size: clamp(10px, 2.3vw, 13px); }
   .profile-layout li { font-size: clamp(9px, 2.2vw, 12px); padding: 8px; }
   .profile-layout ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .profile-photo { min-height: 170px; align-self: stretch; }
-  .profile-photo img { min-height: 170px; }
+  .profile-photo { min-height: 0; height: 34vh; align-self: stretch; }
+  .profile-photo img { min-height: 0; }
   .source-plate img, .magnifier-layout img { max-height: 42vh; }
   .evidence-wall { width: 100%; }
   .evidence-docs { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
