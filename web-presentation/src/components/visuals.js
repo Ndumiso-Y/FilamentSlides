@@ -5,14 +5,14 @@ const assetMap = {
   "trp/image42.png": new URL("../assets/trp/image42.png", import.meta.url).href,
   "trp/image43.png": new URL("../assets/trp/image43.png", import.meta.url).href,
   "reference-letters/reference-letters-copy.pdf": new URL("../assets/reference-letters/reference-letters-copy.pdf", import.meta.url).href,
-  "team/monique.png": new URL("../assets/team/monique.png", import.meta.url).href,
-  "team/vincent.png": new URL("../assets/team/vincent.png", import.meta.url).href,
-  "team/sadha-govender.jpg": new URL("../assets/team/sadha-govender.jpg", import.meta.url).href,
-  "team/marc-corcoran.jpg": new URL("../assets/team/marc-corcoran.jpg", import.meta.url).href,
-  "team/zweli.png": new URL("../assets/team/zweli.png", import.meta.url).href,
-  "team/lefu.png": new URL("../assets/team/lefu.png", import.meta.url).href,
-  "team/dr-rudy.jpg": new URL("../assets/team/dr-rudy.jpg", import.meta.url).href,
-  "team/mxolisi-kobus.jpg": new URL("../assets/team/mxolisi-kobus.jpg", import.meta.url).href,
+  "team/monique.png": new URL("../assets/team/monique-white-background.png", import.meta.url).href,
+  "team/vincent.png": new URL("../assets/team/vincent-white-background.png", import.meta.url).href,
+  "team/sadha-govender.jpg": new URL("../assets/team/sadha-white-background.png", import.meta.url).href,
+  "team/marc-corcoran.jpg": new URL("../assets/team/marc-white-background.png", import.meta.url).href,
+  "team/zweli.png": new URL("../assets/team/zweli-white-background.png", import.meta.url).href,
+  "team/lefu.png": new URL("../assets/team/lefu-white-background.png", import.meta.url).href,
+  "team/dr-rudy.jpg": new URL("../assets/team/dr-rudy-white-background.png", import.meta.url).href,
+  "team/mxolisi-kobus.jpg": new URL("../assets/team/mxolisi-white-background.png", import.meta.url).href,
   "partners/barloworld.jpg": new URL("../assets/partners/barloworld.jpg", import.meta.url).href
 };
 
