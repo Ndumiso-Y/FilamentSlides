@@ -1,0 +1,10 @@
+{
+  "name": "filament-presentation-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix web-presentation run dev",
+    "build": "npm --prefix web-presentation run build",
+    "preview": "npm --prefix web-presentation run preview"
+  }
+}

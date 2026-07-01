@@ -1,0 +1,8 @@
+node_modules/
+dist/
+web-presentation/node_modules/
+web-presentation/dist/
+slides/
+.DS_Store
+Thumbs.db
+*.log

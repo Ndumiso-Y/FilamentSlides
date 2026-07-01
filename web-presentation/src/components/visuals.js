@@ -1,0 +1,170 @@
+const asset = (path) => new URL(`../assets/${path}`, import.meta.url).href;
+
+function is(step, at) {
+  return step >= at ? "is-on" : "";
+}
+
+function buildList(items, step, start = 1) {
+  return items.map((item, index) => `<li class="${is(step, start + index)}">${item}</li>`).join("");
+}
+
+function lanes(items, step) {
+  return `<div class="lane-diagram">${items.map((item, i) => `<div class="${is(step, i + 1)}"><span>${i + 1}</span><strong>${item}</strong></div>`).join("")}</div>`;
+}
+
+function compare(items, step) {
+  return `<div class="compare-board">${items.map((item, i) => `<article class="${is(step, i + 1)}"><small>${item.eyebrow}</small><h3>${item.title}</h3><p>${item.text}</p></article>`).join("")}</div>`;
+}
+
+function timeline(items, step) {
+  return `<div class="timeline">${items.map((item, i) => `<article class="${is(step, i + 1)}"><span>${item.phase}</span><strong>${item.title}</strong><p>${item.text}</p></article>`).join("")}</div>`;
+}
+
+function matrix(items, step) {
+  return `<div class="capability-matrix">${items.map((item, i) => `<article class="${is(step, i + 1)}"><strong>${item.name}</strong><span>${item.role}</span></article>`).join("")}</div>`;
+}
+
+function sourcePlate(visual, step) {
+  return `<div class="source-plate ${visual.orientation || "portrait"} ${is(step, 1)}">
+    <figure><img src="${asset(visual.src)}" alt="${visual.caption}" /><figcaption>${visual.caption}</figcaption></figure>
+    <aside class="${is(step, 2)}"><small>${visual.label || "Source visual"}</small><strong>${visual.insight || "Source evidence retained."}</strong>${visual.note ? `<p>${visual.note}</p>` : ""}</aside>
+  </div>`;
+}
+
+function magnifier(visual, step) {
+  return `<div class="magnifier-layout ${is(step, 1)}">
+    <figure><img src="${asset(visual.src)}" alt="${visual.caption}" /><figcaption>${visual.caption}</figcaption></figure>
+    <div class="magnifier-callout ${is(step, 2)}"><span></span><small>${visual.label || "What to notice"}</small><strong>${visual.insight}</strong><p>${visual.note || "Source visual - values not independently extracted."}</p></div>
+  </div>`;
+}
+
+function profile(visual, step) {
+  return `<div class="profile-layout">
+    <div class="profile-photo ${is(step, 1)}"><img src="${asset(visual.src)}" alt="${visual.name}" /></div>
+    <article class="${is(step, 2)}"><small>${visual.role}</small><h2>${visual.name}</h2><p>${visual.summary}</p><ul>${buildList(visual.points || [], step, 3)}</ul></article>
+  </div>`;
+}
+
+function evidenceWall(visual, step) {
+  return `<div class="evidence-wall">
+    <div class="evidence-callout ${is(step, 1)}"><small>${visual.label || "Source evidence"}</small><strong>${visual.insight}</strong><p>${visual.note || "Original source documents are shown directly."}</p></div>
+    <div class="evidence-docs">${visual.items.map((item, i) => `<figure class="${is(step, i + 2)}"><img src="${asset(item.src)}" alt="${item.caption}" /><figcaption>${item.caption}</figcaption></figure>`).join("")}</div>
+  </div>`;
+}
+
+function goalSystem(step) {
+  const resources = ["Finance", "Human", "Physical", "Information"];
+  const controls = ["Plan", "Organise", "Lead", "Control"];
+  const outcomes = ["MHS", "Tonnes", "Grade", "Cost", "Share Price"];
+  return `<div class="goal-system">
+    <div class="resource-stack">${resources.map((r, i) => `<div class="${is(step, i + 1)}">${r}</div>`).join("")}</div>
+    <svg viewBox="0 0 760 270" aria-label="Resource management goal system">
+      <defs><marker id="arrow-goal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z"/></marker></defs>
+      <path class="sys-line ${is(step, 2)}" d="M110 135H250" />
+      <rect class="sys-box ${is(step, 5)}" x="255" y="55" width="250" height="160" rx="18" />
+      ${controls.map((c, i) => `<text class="sys-text ${is(step, 5 + i)}" x="${300 + (i % 2) * 105}" y="${105 + Math.floor(i / 2) * 62}">${c}</text>`).join("")}
+      <path class="sys-line ${is(step, 9)}" d="M505 135H640" />
+      <circle class="goal-core ${is(step, 10)}" cx="675" cy="135" r="58" />
+      <text class="goal-label ${is(step, 10)}" x="675" y="128">THE GOAL</text>
+      <text class="goal-sub ${is(step, 10)}" x="675" y="150">Now + future</text>
+    </svg>
+    <div class="outcome-strip">${outcomes.map((o, i) => `<span class="${is(step, 10 + i)}">${o}</span>`).join("")}</div>
+  </div>`;
+}
+
+function roiSystem(step) {
+  const items = ["Resources", "Mining sequence", "Tonnes @ g/t", "Revenue", "Share price", "ROI"];
+  return `<div class="roi-system">${items.map((item, i) => `<article class="${is(step, i + 1)}"><span>${String(i + 1).padStart(2, "0")}</span><strong>${item}</strong>${i < items.length - 1 ? "<b></b>" : ""}</article>`).join("")}<div class="roi-equation ${is(step, 7)}">Mining productivity = disciplined flow converted into return</div></div>`;
+}
+
+function miningProcess(step) {
+  const items = ["Drill", "Blast", "Clean", "Support", "Haul", "Hoist"];
+  return `<div class="mining-process">${items.map((item, i) => `<div class="${is(step, i + 1)}"><strong>${item}</strong><span>${["face prep", "release", "remove", "secure", "move", "output"][i]}</span></div>`).join("")}<p class="${is(step, 7)}">Conceptual recreation from source logic - not a measured chart.</p></div>`;
+}
+
+function flowline(mode, step) {
+  if (mode === "balanced") {
+    const stations = ["A", "B", "C", "D"];
+    return `<div class="balanced-flowline">
+      <section class="${is(step, 1)}"><small>Balanced flowline: 100% efficiency</small><div>${stations.map((s) => `<span>${s} - 100%</span>`).join("")}<strong>T = 100%</strong></div></section>
+      <section class="${is(step, 2)}"><small>Balanced flowline: 90% efficiency</small><div>${stations.map((s) => `<span>${s} - 90%</span>`).join("")}<strong>T ~= 59%</strong></div></section>
+      <aside class="${is(step, 3)}">Statistical fluctuations + dependent events = throughput loss</aside>
+      <p class="${is(step, 4)}">Source logic: Mother Nature / Murphy - POOGI Consulting.</p>
+    </div>`;
+  }
+  const rows = [
+    { label: "A", value: "2", eff: "50%" },
+    { label: "B", value: "1", eff: "CONSTRAINT" },
+    { label: "C", value: "3", eff: "33%" },
+    { label: "D", value: "4", eff: "25%" },
+    { label: "E", value: "5", eff: "20%" }
+  ];
+  return `<div class="flow-system unbalanced">
+    ${rows.map((item, i) => `<article class="${is(step, i + 1)}"><span>(${item.label}) = ${item.value}</span><strong>${item.eff}</strong><em>${item.label === "B" ? "throughput of the constraint" : "local efficiency is not system output"}</em></article>`).join("")}
+    <p class="${is(step, 6)}">Inventory accumulates before the constraint: R1m to R2m to R3m to R4m to R5m. System throughput = throughput of the constraint.</p>
+  </div>`;
+}
+
+function bufferLogic(step) {
+  return `<div class="buffer-system">
+    <section class="${is(step, 1)}"><small>Before focus</small><div class="system-track"><span>Input</span><b>Starvation</b><strong>Constraint</strong><b>Blockage</b><span>Output</span></div></section>
+    <section class="${is(step, 2)}"><small>After buffer logic</small><div class="system-track protected"><span>Input</span><b>Buffer</b><strong>Constraint protected</strong><b>Buffer</b><span>Output</span></div></section>
+    <aside class="${is(step, 3)}">Constraint focus improves output by protecting the highest-leverage point in the line.</aside>
+  </div>`;
+}
+
+function improvementMethod(step) {
+  const items = ["Identify bottlenecks / constraints", "Time and motion study", "Interviews", "Recommendations", "Generate buy-in", "Workshop in classroom setting", "Coaching at the face"];
+  return `<div class="method-wheel">${items.map((item, i) => `<article class="${is(step, i + 1)}"><span>${i + 1}</span><strong>${item}</strong></article>`).join("")}</div>`;
+}
+
+function leanArchitecture(step) {
+  const layers = ["Cultural transformation - leadership and mindset", "Management system - governance", "Leader standard work, DIM and KPI architecture", "Operating system - tools and processes", "5S, value stream, problem solving and standard work", "Sustainment architecture and infrastructure"];
+  return `<div class="lean-architecture">${layers.map((item, i) => `<div class="${is(step, i + 1)}"><strong>${item}</strong></div>`).join("")}<p class="${is(step, 7)}">Layered architecture recreated from TRP Lean Transformation A&I logic.</p></div>`;
+}
+
+function proofResults(step) {
+  return `<div class="proof-results">
+    <article class="${is(step, 1)}"><small>TRP Slide 37</small><h3>TMM Development Performance</h3><strong>48% improvement</strong><ul><li>Development crew intervention</li><li>Baseline = 132m</li><li>Source values from TRP proof section</li></ul></article>
+    <article class="${is(step, 2)}"><small>TRP Slide 38</small><h3>TMM Stoping Performance</h3><strong>170% month-five improvement</strong><ul><li>New crew ramp-up = 704 m2</li><li>Client baseline = 750 m2</li><li>Average performance Mar-Jul = 75%</li></ul></article>
+    <aside class="${is(step, 3)}"><span>Additional evidence</span>Refereed technical papers, Sasol Mining PhD intervention context, Impala Platinum 11 Shaft Section 114 and endorsements are retained as proof references.</aside>
+  </div>`;
+}
+
+function graduatePipeline(step) {
+  const items = ["Unemployed graduates", "Onboarding", "Training", "Coaching at the face", "Sustainment", "Employer value / opportunity"];
+  return `<div class="graduate-pipeline">${items.map((item, i) => `<article class="${is(step, i + 1)}"><span>${i + 1}</span><strong>${item}</strong></article>`).join("")}</div>`;
+}
+
+function winModel(step) {
+  const items = [["Businesses", "measurable productivity value"], ["Sponsors / mining", "opportunity and operating proof"], ["Unemployed graduates", "capability and employment pathway"], ["Consultant / facilitator", "method, coaching and transfer"]];
+  return `<div class="premium-win-model">${items.map((item, i) => `<article class="${is(step, i + 1)}"><strong>${item[0]}</strong><span>${item[1]}</span></article>`).join("")}<div class="shared-value ${is(step, 5)}">Shared value</div></div>`;
+}
+
+function pressure(step) {
+  return `<div class="pressure-map">${[["VUCA", "volatile operating context"], ["Governance", "oversight intensity"], ["MHSA", "compliance obligations"], ["Interdependence", "linked mining system"], ["Time", "not enough hours"], ["ROI", "capital return pressure"]].map((item, i) => `<article class="${is(step, i + 1)}"><strong>${item[0]}</strong><span>${item[1]}</span></article>`).join("")}<div>Employer bandwidth</div></div>`;
+}
+
+export function renderVisual(visual, step) {
+  if (visual.type === "lanes") return lanes(visual.items, step);
+  if (visual.type === "compare") return compare(visual.items, step);
+  if (visual.type === "timeline") return timeline(visual.items, step);
+  if (visual.type === "matrix") return matrix(visual.items, step);
+  if (visual.type === "sourcePlate") return sourcePlate(visual, step);
+  if (visual.type === "magnifier") return magnifier(visual, step);
+  if (visual.type === "profile") return profile(visual, step);
+  if (visual.type === "evidenceWall") return evidenceWall(visual, step);
+  if (visual.type === "goalSystem") return goalSystem(step);
+  if (visual.type === "roiSystem") return roiSystem(step);
+  if (visual.type === "miningProcess") return miningProcess(step);
+  if (visual.type === "toc") return `<div class="toc-loop">${["Identify", "Exploit", "Subordinate", "Elevate", "Repeat"].map((label, i) => `<div class="${is(step, i + 1)}"><span>${i + 1}</span><strong>${label}</strong></div>`).join("")}</div>`;
+  if (visual.type === "flowline") return flowline(visual.mode, step);
+  if (visual.type === "bufferLogic") return bufferLogic(step);
+  if (visual.type === "improvementMethod") return improvementMethod(step);
+  if (visual.type === "leanArchitecture") return leanArchitecture(step);
+  if (visual.type === "proofResults") return proofResults(step);
+  if (visual.type === "graduatePipeline") return graduatePipeline(step);
+  if (visual.type === "winModel") return winModel(step);
+  if (visual.type === "orbit") return pressure(step);
+  return "";
+}
