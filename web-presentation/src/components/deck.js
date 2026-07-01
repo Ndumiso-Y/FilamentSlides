@@ -25,7 +25,7 @@ function meta(slide, index) {
 
 function renderDetails(details) {
   if (!details?.items?.length) return "";
-  if (/full credential copy/i.test(details.title || "")) return "";
+  if (/full credential copy|business model copy/i.test(details.title || "")) return "";
   const visibleItems = details.items.slice(0, details.limit || 4);
   const items = visibleItems.map((item) => `<li>${item}</li>`).join("");
   return `

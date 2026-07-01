@@ -1,6 +1,6 @@
 const assetMap = {
-  "trp/source-diagrams/poogi-performance-source.png": new URL("../assets/trp/source-diagrams/poogi-performance-source.png", import.meta.url).href,
-  "trp/source-diagrams/chasm-source.png": new URL("../assets/trp/source-diagrams/chasm-source.png", import.meta.url).href,
+  "source-diagrams/poogi-performance-source.png": new URL("../assets/source-diagrams/poogi-performance-source.png", import.meta.url).href,
+  "source-diagrams/chasm-source.png": new URL("../assets/source-diagrams/chasm-source.png", import.meta.url).href,
   "reference-letters/reference-letters-right-side-up.pdf": new URL("../assets/reference-letters/reference-letters-right-side-up.pdf", import.meta.url).href,
   "team/monique.png": new URL("../assets/team/monique-white-background.png", import.meta.url).href,
   "team/vincent.png": new URL("../assets/team/vincent-white-background.png", import.meta.url).href,
@@ -243,13 +243,13 @@ function improvementMethod(step) {
 
 function leanArchitecture(step) {
   const layers = ["Cultural transformation - leadership and mindset", "Management system - governance", "Leader standard work, DIM and KPI architecture", "Operating system - tools and processes", "5S, value stream, problem solving and standard work", "Sustainment architecture and infrastructure"];
-  return `<div class="lean-architecture">${layers.map((item, i) => `<div class="${is(step, i + 1)}"><strong>${item}</strong></div>`).join("")}<p class="${is(step, 7)}">Layered architecture recreated from TRP Lean Transformation A&I logic.</p></div>`;
+  return `<div class="lean-architecture">${layers.map((item, i) => `<div class="${is(step, i + 1)}"><strong>${item}</strong></div>`).join("")}<p class="${is(step, 7)}">Layered architecture recreated from the client's Lean Transformation A&I logic.</p></div>`;
 }
 
 function proofResults(step) {
   return `<div class="proof-results">
-    <article class="${is(step, 1)}"><small>TRP Slide 37</small><h3>TMM Development Performance</h3><strong>48% improvement</strong><ul><li>Development crew intervention</li><li>Baseline = 132m</li><li>Source values from TRP proof section</li></ul></article>
-    <article class="${is(step, 2)}"><small>TRP Slide 38</small><h3>TMM Stoping Performance</h3><strong>170% month-five improvement</strong><ul><li>New crew ramp-up = 704 m2</li><li>Client baseline = 750 m2</li><li>Average performance Mar-Jul = 75%</li></ul></article>
+    <article class="${is(step, 1)}"><small>Source Slide 37</small><h3>TMM Development Performance</h3><strong>48% improvement</strong><ul><li>Development crew intervention</li><li>Baseline = 132m</li><li>Source values from the client proof section</li></ul></article>
+    <article class="${is(step, 2)}"><small>Source Slide 38</small><h3>TMM Stoping Performance</h3><strong>170% month-five improvement</strong><ul><li>New crew ramp-up = 704 m2</li><li>Client baseline = 750 m2</li><li>Average performance Mar-Jul = 75%</li></ul></article>
     <aside class="${is(step, 3)}"><span>Additional evidence</span>Refereed technical papers, Sasol Mining PhD intervention context, Impala Platinum 11 Shaft Section 114 and endorsements are retained as proof references.</aside>
   </div>`;
 }
@@ -294,7 +294,16 @@ export function renderVisual(visual, step) {
   if (visual.type === "goalSystem") return goalSystem(step);
   if (visual.type === "roiSystem") return roiSystem(step);
   if (visual.type === "miningProcess") return miningProcess(step);
-  if (visual.type === "toc") return `<div class="toc-loop">${["Identify", "Exploit", "Subordinate", "Elevate", "Repeat"].map((label, i) => `<div class="${is(step, i + 1)}"><span>${i + 1}</span><strong>${label}</strong></div>`).join("")}</div>`;
+  if (visual.type === "toc") {
+    const focusingSteps = [
+      { label: "Identify", text: "Find the system constraint." },
+      { label: "Exploit", text: "Get the most out of the constraint as it stands." },
+      { label: "Subordinate", text: "Align everything else to the constraint's pace." },
+      { label: "Elevate", text: "Invest to raise the constraint's capacity." },
+      { label: "Repeat", text: "Beware: Inertia / complacency. If constraint moves, go back to Step 1." }
+    ];
+    return `<div class="toc-loop">${focusingSteps.map((item, i) => `<div class="${is(step, i + 1)}"><span>${i + 1}</span><strong>${item.label}</strong><p>${item.text}</p></div>`).join("")}</div>`;
+  }
   if (visual.type === "flowline") return flowline(visual.mode, step);
   if (visual.type === "bufferLogic") return bufferLogic(step);
   if (visual.type === "improvementMethod") return improvementMethod(step);

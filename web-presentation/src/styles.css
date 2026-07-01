@@ -8,6 +8,7 @@
   --text: #142033;
   --muted: #667085;
   --white: #fff;
+  --nav-safe: 100px;
   font-family: Inter, Arial, Helvetica, sans-serif;
   color: var(--text);
   background: #05080d;
@@ -76,7 +77,10 @@ button { font: inherit; }
   min-height: 0;
   position: relative;
   overflow: hidden;
-  padding: clamp(32px, 4.1vw, 66px) clamp(30px, 5.6vw, 96px) clamp(48px, 4.8vw, 82px);
+  --pad-top: clamp(32px, 4.1vw, 66px);
+  --pad-side: clamp(30px, 5.6vw, 96px);
+  --pad-bottom: max(clamp(48px, 4.8vw, 82px), var(--nav-safe));
+  padding: var(--pad-top) var(--pad-side) var(--pad-bottom);
   background:
     linear-gradient(90deg, rgba(240,100,35,.06), transparent 35%),
     linear-gradient(180deg, #fff, #f7f9fb);
@@ -108,7 +112,7 @@ button { font: inherit; }
   z-index: 2;
   width: 100%;
   max-width: 1480px;
-  height: calc(100dvh - clamp(96px, 8.6vw, 158px));
+  height: calc(100dvh - var(--pad-top, clamp(32px, 4.1vw, 66px)) - var(--pad-bottom, max(clamp(48px, 4.8vw, 82px), var(--nav-safe))));
   min-height: 0;
   overflow: hidden;
   display: block;
@@ -453,15 +457,16 @@ h1 {
   opacity: .2;
   transform: translateY(16px);
   transition: .4s ease;
-  min-height: 130px;
+  min-height: clamp(150px, 20vh, 190px);
   border-radius: 8px;
   padding: 18px;
   color: #fff;
   background: linear-gradient(160deg, var(--navy), var(--blue));
   box-shadow: 0 20px 38px rgba(6,25,47,.22);
 }
-.toc-loop span { display: block; color: var(--orange); font-weight: 900; margin-bottom: 26px; }
-.toc-loop strong { font-size: clamp(16px, 1.4vw, 22px); }
+.toc-loop span { display: block; color: var(--orange); font-weight: 900; margin-bottom: 18px; }
+.toc-loop strong { display: block; font-size: clamp(16px, 1.4vw, 22px); }
+.toc-loop p { margin: 8px 0 0; color: rgba(255,255,255,.78); font-size: clamp(11px, .85vw, 13px); line-height: 1.3; }
 
 .curve-wrap { width: min(86%, 900px); margin-top: 1%; }
 .curve-wrap svg { width: 100%; height: auto; border-radius: 8px; background: #fff; border: 1px solid var(--line); box-shadow: 0 16px 34px rgba(6,25,47,.08); }
@@ -696,12 +701,12 @@ blockquote {
 .source-plate img {
   display: block;
   width: 100%;
-  max-height: 470px;
+  max-height: min(470px, 52vh);
   object-fit: contain;
   background: #f8fafc;
 }
-.source-plate.portrait img { max-height: 510px; }
-.source-plate.landscape img { max-height: 420px; }
+.source-plate.portrait img { max-height: min(510px, 55vh); }
+.source-plate.landscape img { max-height: min(420px, 48vh); }
 .source-plate figcaption,
 .magnifier-layout figcaption,
 .evidence-docs figcaption {
@@ -763,7 +768,7 @@ blockquote {
 }
 .magnifier-layout img {
   width: 100%;
-  max-height: 460px;
+  max-height: min(460px, 50vh);
   object-fit: contain;
   display: block;
   background: #f8fafc;
@@ -865,7 +870,7 @@ blockquote {
   grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr);
   gap: 18px;
   align-items: stretch;
-  margin-top: clamp(28px, 4vw, 52px);
+  margin-top: clamp(14px, 2.6vh, 52px);
 }
 
 .business-model section,
@@ -880,7 +885,7 @@ blockquote {
 }
 
 .business-model section {
-  padding: clamp(28px, 3.2vw, 48px);
+  padding: clamp(16px, 2.6vh, 48px);
   border-left: 6px solid var(--orange);
 }
 
@@ -912,8 +917,8 @@ blockquote {
 }
 
 .business-pillars article {
-  padding: 22px;
-  min-height: 210px;
+  padding: clamp(12px, 2.2vh, 22px);
+  min-height: clamp(120px, 20vh, 210px);
   border-top: 5px solid var(--orange);
 }
 
@@ -939,7 +944,7 @@ blockquote {
 
 .business-detail {
   grid-column: 1 / -1;
-  padding: clamp(22px, 2.4vw, 34px);
+  padding: clamp(14px, 2.4vh, 34px);
   background: linear-gradient(135deg, var(--navy), var(--navy-2));
   color: #fff;
 }
@@ -2345,6 +2350,8 @@ blockquote {
   .business-model { width: 100%; grid-template-columns: 1fr; }
   .business-pillars { grid-template-columns: 1fr; }
   .business-pillars article { min-height: 0; }
+  .toc-loop { grid-template-columns: repeat(3, 1fr); width: 100%; }
+  .toc-loop div { min-height: 0; }
   .engineering-flow { width: 100%; height: 460px; }
   .tmm-readiness-model { width: 100%; height: 460px; }
   .tmm-ramp { left: 22px; top: 30px; width: 210px; }
@@ -2407,7 +2414,10 @@ blockquote {
     height: 100%;
     min-height: 0;
     overflow: hidden;
-    padding: clamp(18px, 4.5vw, 32px);
+    --pad-top: clamp(18px, 4.5vw, 32px);
+    --pad-side: clamp(18px, 4.5vw, 32px);
+    --pad-bottom: max(clamp(18px, 4.5vw, 32px), 76px);
+    padding: var(--pad-top) var(--pad-side) var(--pad-bottom);
   }
   .slide-meta {
     position: relative;
@@ -2481,6 +2491,11 @@ blockquote {
   .business-pillars strong { font-size: clamp(12px, 3vw, 16px); }
   .business-pillars span { width: 28px; height: 28px; margin-bottom: 8px; }
   .business-detail ul { columns: 1; }
+  .toc-loop { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .toc-loop div { min-height: 0; padding: 10px; }
+  .toc-loop span { margin-bottom: 8px; font-size: 12px; }
+  .toc-loop strong { font-size: clamp(11px, 2.6vw, 14px); }
+  .toc-loop p { font-size: clamp(8px, 2vw, 10px); line-height: 1.2; }
   .profile-layout { min-height: 0; }
   .profile-layout article { padding: 12px; }
   .profile-layout h2 { font-size: clamp(20px, 5vw, 30px); }
@@ -2585,6 +2600,33 @@ blockquote {
   .closing-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
   .closing-cards article { min-height: 0; }
   .deck-chrome { right: 12px; bottom: 12px; }
+}
+
+/* Shorter browser windows and small fullscreen displays: shrink vertical rhythm
+   and allow the slide body to scroll instead of clipping under overflow:hidden. */
+@media (max-height: 760px) {
+  :root { --nav-safe: 84px; }
+  .slide { --pad-top: clamp(18px, 3.2vh, 40px); --pad-bottom: max(clamp(18px, 3.2vh, 40px), var(--nav-safe)); }
+  .slide-content { overflow-y: auto; }
+  .slide-meta { margin-bottom: clamp(10px, 1.6vh, 24px); }
+  .brand-mark { top: clamp(18px, 3.2vh, 40px); padding: 10px 14px; }
+  .brand-mark img { width: clamp(110px, 7vw, 160px); }
+  .kicker { margin-bottom: 8px; }
+  h1 { font-size: clamp(22px, 4.4vh, 52px); line-height: 1.03; }
+  .statement { margin: 8px 0 14px; font-size: clamp(13px, 2vh, 19px); }
+  .copy-panel { max-height: 15vh; margin-top: 10px; padding: 10px 14px; }
+  .source-plate, .magnifier-layout, .profile-layout, .evidence-wall, .goal-system, .roi-system,
+  .mining-process, .flow-system, .buffer-system, .method-wheel, .lean-architecture,
+  .graduate-pipeline, .premium-win-model, .pressure-map, .concept-curve, .business-model,
+  .toc-loop, .engineering-flow, .tmm-readiness-model, .engineering-constraint-map,
+  .engineering-chart, .pipeline-protection, .closing-impact, .partner-matrix-visual,
+  .capability-matrix { margin-top: 12px; }
+  .source-plate img, .magnifier-layout img { max-height: 32vh; }
+  .profile-photo { height: min(30vh, 320px); }
+  .business-pillars article { min-height: 0; }
+  .toc-loop div { min-height: 0; }
+  .toc-loop p { font-size: 10px; }
+  .deck-chrome { bottom: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
