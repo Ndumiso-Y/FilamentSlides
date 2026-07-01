@@ -1,5 +1,4 @@
 const assetMap = {
-  "operations/tmm-engineering-asset-readiness-model.jpg": new URL("../assets/operations/tmm-engineering-asset-readiness-model.jpg", import.meta.url).href,
   "trp/source-diagrams/poogi-performance-source.png": new URL("../assets/trp/source-diagrams/poogi-performance-source.png", import.meta.url).href,
   "trp/source-diagrams/chasm-source.png": new URL("../assets/trp/source-diagrams/chasm-source.png", import.meta.url).href,
   "reference-letters/reference-letters-right-side-up.pdf": new URL("../assets/reference-letters/reference-letters-right-side-up.pdf", import.meta.url).href,
@@ -97,6 +96,30 @@ function engineeringDieselFlow(step) {
     <aside class="flow-callout bay-issues ${is(step, 2)}"><strong>Diesel bay losses</strong><span>Arrival time</span><span>Reporting procedure</span><span>Traffic / queuing</span><span>Contaminated containers</span><span>D/Bay used as P/Bay at E.O.S.</span></aside>
     <aside class="flow-callout uv-issues ${is(step, 3)}"><strong>Utility vehicle constraint</strong><span>1 UV</span><span>1 operator</span><span>No operator on A/S and N/S</span><span>Under utilisation of UV</span><span>Communication: no radio</span></aside>
     <aside class="flow-callout section-gap ${is(step, 4)}"><strong>Execution gap</strong><span>UV never goes to the section</span></aside>
+  </div>`;
+}
+
+function tmmReadinessModel(step) {
+  const systems = [
+    ["Maintenance", "PM compliance, field service, defects, backlog"],
+    ["Infrastructure", "Workshops, power, ventilation, dewatering, roads"],
+    ["Supply chain", "Spares, tyres, lubricants, rotables, lead times"],
+    ["Compliance", "TMM COP, inspections, brakes, steering, fire suppression"],
+    ["People", "Artisans, planners, supervisors, operators, OEM support"],
+    ["Data", "CMMS, asset hierarchy, KPIs, reliability evidence"]
+  ];
+  const gates = ["Technical", "Legal", "Safety", "CMMS", "Spares", "Training", "OEM", "Emergency"];
+  return `<div class="tmm-readiness-model">
+    <div class="tmm-ramp ${is(step, 1)}"><small>Fleet growth pressure</small><strong>4-5x TMM ramp-up</strong><span>Six-month absorption test</span></div>
+    <div class="tmm-question ${is(step, 2)}">Can the mine safely absorb, maintain, operate, support, govern and improve the expanded fleet?</div>
+    <div class="tmm-systems">${systems.map((item, i) => `<article class="${is(step, i + 3)}"><strong>${item[0]}</strong><span>${item[1]}</span></article>`).join("")}</div>
+    <div class="tmm-control ${is(step, 9)}"><small>Engineering Growth Control Room</small><strong>Constraint review + readiness governance</strong><span>Engineering, Mining, SHEQ, Supply Chain, HR, Finance, OEMs and contractors</span></div>
+    <div class="tmm-gates ${is(step, 10)}"><small>Fleet induction gates</small>${gates.map((gate) => `<span>${gate}</span>`).join("")}</div>
+    <div class="tmm-roadmap">
+      <article class="${is(step, 11)}"><small>0-30 days</small><strong>Stabilise and protect</strong></article>
+      <article class="${is(step, 12)}"><small>31-90 days</small><strong>Build capacity</strong></article>
+      <article class="${is(step, 13)}"><small>91-180 days</small><strong>Scale and institutionalise</strong></article>
+    </div>
   </div>`;
 }
 
@@ -263,6 +286,7 @@ export function renderVisual(visual, step) {
   if (visual.type === "profile") return profile(visual, step);
   if (visual.type === "evidenceWall") return evidenceWall(visual, step);
   if (visual.type === "engineeringDieselFlow") return engineeringDieselFlow(step);
+  if (visual.type === "tmmReadinessModel") return tmmReadinessModel(step);
   if (visual.type === "engineeringFlowChart") return engineeringFlowChart(visual, step);
   if (visual.type === "engineeringConstraintMap") return engineeringConstraintMap(step);
   if (visual.type === "pipelineProtection") return pipelineProtection(step);
