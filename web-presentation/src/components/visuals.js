@@ -37,7 +37,7 @@ function timeline(items, step) {
 }
 
 function matrix(items, step) {
-  return `<div class="capability-matrix">${items.map((item, i) => `<article class="${is(step, i + 1)}"><strong>${item.name}</strong><span>${item.role}</span></article>`).join("")}</div>`;
+  return `<div class="capability-matrix">${items.map((item, i) => `<article class="${is(step, i + 1)}"><strong>${item.name}</strong><span>${item.role}</span>${item.text ? `<p>${item.text}</p>` : ""}</article>`).join("")}</div>`;
 }
 
 function sourcePlate(visual, step) {
