@@ -822,11 +822,48 @@ blockquote {
   opacity: .1;
   transform: translateY(18px);
   transition: .45s ease;
+  position: relative;
   padding: clamp(22px, 2.4vw, 36px);
   border-radius: 8px;
   background: #fff;
   border-top: 6px solid var(--orange);
   box-shadow: 0 22px 50px rgba(6,25,47,.14);
+}
+.profile-badge {
+  position: absolute;
+  top: clamp(18px, 1.8vw, 26px);
+  right: clamp(18px, 1.8vw, 26px);
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  width: clamp(78px, 6.2vw, 112px);
+  padding: 8px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid rgba(6,25,47,.1);
+  box-shadow: 0 14px 30px rgba(6,25,47,.12);
+  opacity: .1;
+  transform: translateY(10px) scale(.96);
+  transition: .35s ease;
+}
+.profile-badge img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 54px;
+  object-fit: contain;
+}
+.profile-badge span {
+  color: var(--navy);
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.profile-badge.is-on {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  animation: scaleIn .45s cubic-bezier(.2,.8,.2,1) both .08s;
 }
 .profile-layout small {
   color: var(--orange);
@@ -2498,6 +2535,9 @@ blockquote {
   .toc-loop p { font-size: clamp(8px, 2vw, 10px); line-height: 1.2; }
   .profile-layout { min-height: 0; }
   .profile-layout article { padding: 12px; }
+  .profile-badge { top: 10px; right: 10px; width: clamp(50px, 12vw, 70px); padding: 5px; }
+  .profile-badge img { max-height: 32px; }
+  .profile-badge span { display: none; }
   .profile-layout h2 { font-size: clamp(20px, 5vw, 30px); }
   .profile-layout p { font-size: clamp(10px, 2.3vw, 13px); }
   .profile-layout li { font-size: clamp(9px, 2.2vw, 12px); padding: 8px; }
@@ -2647,7 +2687,7 @@ blockquote {
   .print-deck { display: block; }
   .slide-frame { width: 100vw; height: auto; padding: 0; box-shadow: none; border-radius: 0; }
   .slide { page-break-after: always; width: 100vw; height: 56.25vw; border-radius: 0; }
-  .build, .copy-panel, .compare-board article, .timeline article, .capability-matrix article, .business-model section, .business-pillars article, .business-detail, .lane-diagram div, .toc-loop div, .flowline div, .evidence-frame, .curve, .gap, .zone, .curve-labels span, .stakeholder-model article, .win-core, .source-plate, .source-plate aside, .magnifier-layout, .magnifier-callout, .profile-photo, .profile-layout article, .profile-layout li, .evidence-callout, .evidence-docs figure, .resource-stack div, .outcome-strip span, .sys-line, .sys-box, .sys-text, .goal-core, .goal-label, .goal-sub, .roi-system article, .roi-equation, .graduate-pipeline article, .premium-win-model article, .mining-process div, .mining-process p, .flow-system article, .flow-system p, .balanced-flowline section, .balanced-flowline aside, .balanced-flowline p, .method-wheel article, .buffer-system section, .buffer-system aside, .lean-architecture div, .lean-architecture p, .concept-curve p, .pressure-map article, .tmm-ramp, .tmm-question, .tmm-systems article, .tmm-control, .tmm-gates, .tmm-roadmap article, .shared-value, .proof-results article, .proof-results aside, .closing-ribbon, .closing-cards article { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+  .build, .copy-panel, .compare-board article, .timeline article, .capability-matrix article, .business-model section, .business-pillars article, .business-detail, .lane-diagram div, .toc-loop div, .flowline div, .evidence-frame, .curve, .gap, .zone, .curve-labels span, .stakeholder-model article, .win-core, .source-plate, .source-plate aside, .magnifier-layout, .magnifier-callout, .profile-photo, .profile-layout article, .profile-badge, .profile-layout li, .evidence-callout, .evidence-docs figure, .resource-stack div, .outcome-strip span, .sys-line, .sys-box, .sys-text, .goal-core, .goal-label, .goal-sub, .roi-system article, .roi-equation, .graduate-pipeline article, .premium-win-model article, .mining-process div, .mining-process p, .flow-system article, .flow-system p, .balanced-flowline section, .balanced-flowline aside, .balanced-flowline p, .method-wheel article, .buffer-system section, .buffer-system aside, .lean-architecture div, .lean-architecture p, .concept-curve p, .pressure-map article, .tmm-ramp, .tmm-question, .tmm-systems article, .tmm-control, .tmm-gates, .tmm-roadmap article, .shared-value, .proof-results article, .proof-results aside, .closing-ribbon, .closing-cards article { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
   .tmm-question { transform: translate(-50%, -50%) !important; }
   .tmm-control { transform: translateX(-50%) !important; }
   @page { size: 16in 9in; margin: 0; }

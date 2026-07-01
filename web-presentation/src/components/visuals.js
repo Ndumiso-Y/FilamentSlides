@@ -10,7 +10,8 @@ const assetMap = {
   "team/lefu.png": new URL("../assets/team/lefu-white-background.png", import.meta.url).href,
   "team/dr-rudy.jpg": new URL("../assets/team/dr-rudy-white-background.png", import.meta.url).href,
   "team/mxolisi-kobus.jpg": new URL("../assets/team/mxolisi-white-background.png", import.meta.url).href,
-  "partners/barloworld.jpg": new URL("../assets/partners/barloworld.jpg", import.meta.url).href
+  "partners/barloworld.jpg": new URL("../assets/partners/barloworld.jpg", import.meta.url).href,
+  "partners/chasm-bridge.png": new URL("../assets/partners/chasm-bridge.png", import.meta.url).href
 };
 
 const asset = (path) => assetMap[path] || "";
@@ -59,9 +60,12 @@ function magnifier(visual, step) {
 }
 
 function profile(visual, step) {
+  const badge = visual.badge
+    ? `<div class="profile-badge ${is(step, 2)}"><img src="${asset(visual.badge.src)}" alt="${visual.badge.alt}" />${visual.badge.label ? `<span>${visual.badge.label}</span>` : ""}</div>`
+    : "";
   return `<div class="profile-layout">
     <div class="profile-photo ${is(step, 1)}"><img src="${asset(visual.src)}" alt="${visual.name}" /></div>
-    <article class="${is(step, 2)}"><small>${visual.role}</small><h2>${visual.name}</h2><p>${visual.summary}</p><ul>${buildList(visual.points || [], step, 3)}</ul></article>
+    <article class="${is(step, 2)}">${badge}<small>${visual.role}</small><h2>${visual.name}</h2><p>${visual.summary}</p><ul>${buildList(visual.points || [], step, 3)}</ul></article>
   </div>`;
 }
 
