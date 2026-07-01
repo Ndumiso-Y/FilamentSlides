@@ -68,8 +68,7 @@ function renderSlide(slide, index, forcedStep = null) {
     slide.points?.length ? `<div class="point-grid">${slide.points.map((p, i) => visible(`<article><strong>${p.label}</strong><p>${p.text}</p></article>`, step, i + 1)).join("")}</div>` : "",
     slide.quote ? visible(`<blockquote>${slide.quote}</blockquote>`, step, 1) : "",
     tags ? `<div class="tag-row">${tags}</div>` : "",
-    slide.note ? `<p class="confirmation-note">${slide.note}</p>` : "",
-    `<div class="source-pill">${slide.source}</div>`
+    slide.note ? `<p class="confirmation-note">${slide.note}</p>` : ""
   ].join("");
 
   return `
