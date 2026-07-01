@@ -1,4 +1,19 @@
-const asset = (path) => new URL(`../assets/${path}`, import.meta.url).href;
+const assetMap = {
+  "operations/tmm-engineering-asset-readiness-model.jpg": new URL("../assets/operations/tmm-engineering-asset-readiness-model.jpg", import.meta.url).href,
+  "trp/source-diagrams/poogi-performance-source.png": new URL("../assets/trp/source-diagrams/poogi-performance-source.png", import.meta.url).href,
+  "trp/source-diagrams/chasm-source.png": new URL("../assets/trp/source-diagrams/chasm-source.png", import.meta.url).href,
+  "trp/image42.png": new URL("../assets/trp/image42.png", import.meta.url).href,
+  "trp/image43.png": new URL("../assets/trp/image43.png", import.meta.url).href,
+  "team/monique.png": new URL("../assets/team/monique.png", import.meta.url).href,
+  "team/vincent.png": new URL("../assets/team/vincent.png", import.meta.url).href,
+  "team/sadha-govender.jpg": new URL("../assets/team/sadha-govender.jpg", import.meta.url).href,
+  "team/marc-corcoran.jpg": new URL("../assets/team/marc-corcoran.jpg", import.meta.url).href,
+  "team/zweli.png": new URL("../assets/team/zweli.png", import.meta.url).href,
+  "team/lefu.png": new URL("../assets/team/lefu.png", import.meta.url).href,
+  "team/dr-rudy.jpg": new URL("../assets/team/dr-rudy.jpg", import.meta.url).href
+};
+
+const asset = (path) => assetMap[path] || "";
 
 function is(step, at) {
   return step >= at ? "is-on" : "";
@@ -48,7 +63,24 @@ function profile(visual, step) {
 function evidenceWall(visual, step) {
   return `<div class="evidence-wall">
     <div class="evidence-callout ${is(step, 1)}"><small>${visual.label || "Source evidence"}</small><strong>${visual.insight}</strong><p>${visual.note || "Original source documents are shown directly."}</p></div>
-    <div class="evidence-docs">${visual.items.map((item, i) => `<figure class="${is(step, i + 2)}"><img src="${asset(item.src)}" alt="${item.caption}" /><figcaption>${item.caption}</figcaption></figure>`).join("")}</div>
+    <div class="evidence-docs">${visual.items.map((item, i) => `<figure class="${is(step, i + 2)}"><a class="evidence-zoom" href="${asset(item.src)}" target="_blank" rel="noreferrer"><img src="${asset(item.src)}" alt="${item.caption}" /><span>Open full size</span></a><figcaption>${item.caption}</figcaption></figure>`).join("")}</div>
+  </div>`;
+}
+
+function businessModel(visual, step) {
+  return `<div class="business-model">
+    <section class="${is(step, 1)}">
+      <small>Purpose</small>
+      <h2>${visual.purpose.title}</h2>
+      <p>${visual.purpose.text}</p>
+    </section>
+    <div class="business-pillars">
+      ${visual.pillars.map((item, i) => `<article class="${is(step, i + 2)}"><span>0${i + 1}</span><strong>${item.title}</strong><p>${item.text}</p></article>`).join("")}
+    </div>
+    <div class="business-detail ${is(step, 5)}">
+      <h3>${visual.detail.title}</h3>
+      <ul>${visual.detail.items.map((item) => `<li>${item}</li>`).join("")}</ul>
+    </div>
   </div>`;
 }
 
@@ -161,6 +193,7 @@ export function renderVisual(visual, step) {
   if (visual.type === "magnifier") return magnifier(visual, step);
   if (visual.type === "profile") return profile(visual, step);
   if (visual.type === "evidenceWall") return evidenceWall(visual, step);
+  if (visual.type === "businessModel") return businessModel(visual, step);
   if (visual.type === "goalSystem") return goalSystem(step);
   if (visual.type === "roiSystem") return roiSystem(step);
   if (visual.type === "miningProcess") return miningProcess(step);

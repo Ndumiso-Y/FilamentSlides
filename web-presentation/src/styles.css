@@ -231,6 +231,9 @@ h1 {
 .compare-board article.is-on,
 .timeline article.is-on,
 .capability-matrix article.is-on,
+.business-model section.is-on,
+.business-pillars article.is-on,
+.business-detail.is-on,
 .profile-photo.is-on,
 .profile-layout article.is-on,
 .profile-layout li.is-on,
@@ -268,12 +271,14 @@ h1 {
 .compare-board article:nth-child(2),
 .timeline article:nth-child(2),
 .capability-matrix article:nth-child(2),
+.business-pillars article:nth-child(2),
 .profile-layout li:nth-child(2),
 .closing-cards article:nth-child(2) { animation-delay: .08s; }
 .lane-diagram div:nth-child(3),
 .compare-board article:nth-child(3),
 .timeline article:nth-child(3),
 .capability-matrix article:nth-child(3),
+.business-pillars article:nth-child(3),
 .profile-layout li:nth-child(3),
 .closing-cards article:nth-child(3) { animation-delay: .16s; }
 .lane-diagram div:nth-child(4),
@@ -768,6 +773,118 @@ blockquote {
   font-size: clamp(13px, 1.02vw, 17px);
 }
 
+.business-model {
+  width: min(100%, 1180px);
+  display: grid;
+  grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-top: clamp(28px, 4vw, 52px);
+}
+
+.business-model section,
+.business-pillars article,
+.business-detail {
+  opacity: .14;
+  transform: translateY(18px);
+  border-radius: 8px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(6,25,47,.12);
+  box-shadow: 0 20px 46px rgba(6,25,47,.12);
+}
+
+.business-model section {
+  padding: clamp(28px, 3.2vw, 48px);
+  border-left: 6px solid var(--orange);
+}
+
+.business-model small {
+  color: var(--orange);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.business-model h2 {
+  margin: 12px 0 14px;
+  color: var(--navy);
+  font-size: clamp(30px, 3.1vw, 52px);
+  line-height: 1;
+}
+
+.business-model p {
+  margin: 0;
+  color: #475467;
+  font-size: clamp(15px, 1.12vw, 19px);
+  line-height: 1.45;
+}
+
+.business-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.business-pillars article {
+  padding: 22px;
+  min-height: 210px;
+  border-top: 5px solid var(--orange);
+}
+
+.business-pillars span {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(240,100,35,.12);
+  color: var(--orange);
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+
+.business-pillars strong {
+  display: block;
+  color: var(--navy);
+  font-size: clamp(20px, 1.6vw, 28px);
+  line-height: 1.05;
+  margin-bottom: 10px;
+}
+
+.business-detail {
+  grid-column: 1 / -1;
+  padding: clamp(22px, 2.4vw, 34px);
+  background: linear-gradient(135deg, var(--navy), var(--navy-2));
+  color: #fff;
+}
+
+.business-detail h3 {
+  margin: 0 0 14px;
+  color: #fff;
+  font-size: clamp(22px, 2vw, 34px);
+}
+
+.business-detail ul {
+  columns: 2;
+  column-gap: 44px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.business-detail li {
+  break-inside: avoid;
+  margin: 0 0 9px;
+  color: rgba(255,255,255,.84);
+  font-size: clamp(14px, 1.05vw, 17px);
+  line-height: 1.38;
+}
+
+.business-model .is-on {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  animation: riseIn .5s cubic-bezier(.2,.8,.2,1) both;
+}
+
 .evidence-wall {
   display: grid;
   grid-template-columns: 28% 1fr;
@@ -791,6 +908,30 @@ blockquote {
   object-fit: contain;
   display: block;
   background: #fff;
+}
+.evidence-zoom {
+  position: relative;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.evidence-zoom span {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 8px 11px;
+  border-radius: 999px;
+  background: rgba(6,25,47,.92);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  box-shadow: 0 10px 24px rgba(6,25,47,.24);
+}
+.evidence-docs figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
 }
 
 .goal-system {
@@ -1452,6 +1593,9 @@ blockquote {
   }
   .profile-photo { min-height: 460px; }
   .profile-photo img { min-height: 460px; }
+  .business-model { width: 100%; grid-template-columns: 1fr; }
+  .business-pillars { grid-template-columns: 1fr; }
+  .business-pillars article { min-height: 0; }
   .closing-impact { width: 100%; }
   .closing-cards { grid-template-columns: 1fr; }
   .closing-ribbon { position: relative; top: auto; right: auto; width: fit-content; margin: 0 0 22px auto; }
@@ -1517,6 +1661,12 @@ blockquote {
   .copy-panel ul { columns: 1; }
   .copy-panel li { font-size: 16px; line-height: 1.45; }
   .source-plate, .magnifier-layout, .profile-layout, .evidence-wall { grid-template-columns: 1fr; gap: 10px; }
+  .business-model { grid-template-columns: 1fr; gap: 12px; }
+  .business-pillars { grid-template-columns: 1fr; }
+  .business-model section,
+  .business-pillars article,
+  .business-detail { padding: 20px; min-height: 0; }
+  .business-detail ul { columns: 1; }
   .profile-layout { min-height: 0; }
   .profile-layout article { padding: 22px; }
   .profile-layout h2 { font-size: 34px; }
@@ -1567,6 +1717,6 @@ blockquote {
   .print-deck { display: block; }
   .slide-frame { width: 100vw; height: auto; padding: 0; box-shadow: none; border-radius: 0; }
   .slide { page-break-after: always; width: 100vw; height: 56.25vw; border-radius: 0; }
-  .build, .copy-panel, .compare-board article, .timeline article, .capability-matrix article, .lane-diagram div, .toc-loop div, .flowline div, .evidence-frame, .curve, .gap, .zone, .curve-labels span, .stakeholder-model article, .win-core, .source-plate, .source-plate aside, .magnifier-layout, .magnifier-callout, .profile-photo, .profile-layout article, .profile-layout li, .evidence-callout, .evidence-docs figure, .resource-stack div, .outcome-strip span, .sys-line, .sys-box, .sys-text, .goal-core, .goal-label, .goal-sub, .roi-system article, .roi-equation, .graduate-pipeline article, .premium-win-model article, .mining-process div, .mining-process p, .flow-system article, .flow-system p, .balanced-flowline section, .balanced-flowline aside, .balanced-flowline p, .method-wheel article, .buffer-system section, .buffer-system aside, .lean-architecture div, .lean-architecture p, .concept-curve p, .pressure-map article, .shared-value, .proof-results article, .proof-results aside, .closing-ribbon, .closing-cards article { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+  .build, .copy-panel, .compare-board article, .timeline article, .capability-matrix article, .business-model section, .business-pillars article, .business-detail, .lane-diagram div, .toc-loop div, .flowline div, .evidence-frame, .curve, .gap, .zone, .curve-labels span, .stakeholder-model article, .win-core, .source-plate, .source-plate aside, .magnifier-layout, .magnifier-callout, .profile-photo, .profile-layout article, .profile-layout li, .evidence-callout, .evidence-docs figure, .resource-stack div, .outcome-strip span, .sys-line, .sys-box, .sys-text, .goal-core, .goal-label, .goal-sub, .roi-system article, .roi-equation, .graduate-pipeline article, .premium-win-model article, .mining-process div, .mining-process p, .flow-system article, .flow-system p, .balanced-flowline section, .balanced-flowline aside, .balanced-flowline p, .method-wheel article, .buffer-system section, .buffer-system aside, .lean-architecture div, .lean-architecture p, .concept-curve p, .pressure-map article, .shared-value, .proof-results article, .proof-results aside, .closing-ribbon, .closing-cards article { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
   @page { size: 16in 9in; margin: 0; }
 }
