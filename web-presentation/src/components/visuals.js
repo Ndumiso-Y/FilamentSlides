@@ -4,6 +4,7 @@ const assetMap = {
   "trp/source-diagrams/chasm-source.png": new URL("../assets/trp/source-diagrams/chasm-source.png", import.meta.url).href,
   "trp/image42.png": new URL("../assets/trp/image42.png", import.meta.url).href,
   "trp/image43.png": new URL("../assets/trp/image43.png", import.meta.url).href,
+  "reference-letters/reference-letters-copy.pdf": new URL("../assets/reference-letters/reference-letters-copy.pdf", import.meta.url).href,
   "team/monique.png": new URL("../assets/team/monique.png", import.meta.url).href,
   "team/vincent.png": new URL("../assets/team/vincent.png", import.meta.url).href,
   "team/sadha-govender.jpg": new URL("../assets/team/sadha-govender.jpg", import.meta.url).href,
@@ -63,7 +64,13 @@ function profile(visual, step) {
 function evidenceWall(visual, step) {
   return `<div class="evidence-wall">
     <div class="evidence-callout ${is(step, 1)}"><small>${visual.label || "Source evidence"}</small><strong>${visual.insight}</strong><p>${visual.note || "Original source documents are shown directly."}</p></div>
-    <div class="evidence-docs">${visual.items.map((item, i) => `<figure class="${is(step, i + 2)}"><a class="evidence-zoom" href="${asset(item.src)}" target="_blank" rel="noreferrer"><img src="${asset(item.src)}" alt="${item.caption}" /><span>Open full size</span></a><figcaption>${item.caption}</figcaption></figure>`).join("")}</div>
+    <div class="evidence-docs">${visual.items.map((item, i) => {
+      const url = asset(item.src);
+      const media = item.kind === "pdf"
+        ? `<div class="evidence-zoom pdf-frame"><iframe src="${url}#view=FitH" title="${item.caption}"></iframe><a href="${url}" target="_blank" rel="noreferrer">Open PDF</a></div>`
+        : `<a class="evidence-zoom" href="${url}" target="_blank" rel="noreferrer"><img src="${url}" alt="${item.caption}" /><span>Open full size</span></a>`;
+      return `<figure class="${item.kind === "pdf" ? "pdf-evidence" : ""} ${is(step, i + 2)}">${media}<figcaption>${item.caption}</figcaption></figure>`;
+    }).join("")}</div>
   </div>`;
 }
 
