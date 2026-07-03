@@ -14,13 +14,29 @@ function visible(html, step, at = 1) {
   return `<div class="build ${step >= at ? "is-visible" : ""}">${html}</div>`;
 }
 
-function meta(slide, index) {
+function meta(slide) {
   return `
     <div class="slide-meta">
       <span>${slide.section}</span>
-      <span>${String(index + 1).padStart(2, "0")} / ${slides.length}</span>
     </div>
   `;
+}
+
+function pageNumber(index) {
+  return `<div class="page-number">${String(index + 1).padStart(2, "0")} / ${slides.length}</div>`;
+}
+
+function sectionRanges() {
+  const ranges = [];
+  slides.forEach((slide, i) => {
+    const last = ranges[ranges.length - 1];
+    if (last && last.section === slide.section) {
+      last.end = i;
+    } else {
+      ranges.push({ section: slide.section, start: i, end: i });
+    }
+  });
+  return ranges;
 }
 
 function renderDetails(details) {
@@ -52,14 +68,16 @@ function renderSlide(slide, index, forcedStep = null) {
 
   return `
     <section class="slide ${slide.tone || "light"} ${slide.layout || ""}">
-      ${meta(slide, index)}
+      ${meta(slide)}
       <div class="brand-mark"><img src="${new URL("../assets/filament-logo-cropped.png", import.meta.url).href}" alt="Filament" /></div>
       <div class="slide-content">${body}</div>
+      ${pageNumber(index)}
     </section>
   `;
 }
 
 function renderOverview() {
+  const ranges = sectionRanges();
   return `
     <section class="overview-panel">
       <div class="overview-head">
@@ -67,7 +85,18 @@ function renderOverview() {
           <p class="kicker">Section navigation</p>
           <h1>Presentation Overview</h1>
         </div>
-        <button class="text-button" data-action="overview">Return</button>
+        <div class="overview-head-right">
+          <span class="overview-count">${slides.length} slides</span>
+          <button class="text-button" data-action="overview">Return</button>
+        </div>
+      </div>
+      <div class="section-index">
+        ${ranges.map((r) => `
+          <button class="section-index-item" data-jump="${r.start}">
+            <span>${r.start === r.end ? String(r.start + 1).padStart(2, "0") : `${String(r.start + 1).padStart(2, "0")}–${String(r.end + 1).padStart(2, "0")}`}</span>
+            <strong>${r.section}</strong>
+          </button>
+        `).join("")}
       </div>
       <div class="thumb-grid">
         ${slides.map((slide, i) => `
